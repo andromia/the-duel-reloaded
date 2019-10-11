@@ -540,3 +540,15 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2019.10.11-23.06.57:761][  1]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000004 seconds (found 0 objects)
 [2019.10.11-23.06.57:761][  1]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000043 seconds (updated 0 objects)
 [2019.10.11-23.07.11:420][ 42]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.07.41:618][886]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.07.52:320][151]LogEditorViewport: Clicking on Actor (LMB): ThirdPersonCharacter_C (ThirdPersonCharacter)
+[2019.10.11-23.08.00:348][  4]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.08.00:443][ 15]LogSlate: Took 0.000139 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2019.10.11-23.08.00:462][ 15]LogAssetEditorManager: Opening Asset editor for Blueprint /Game/ThirdPersonBP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter
+[2019.10.11-23.08.03:389][ 15]LogContentBrowser: Native class hierarchy updated for 'BlueprintGraph' in 0.0005 seconds. Added 121 classes and 0 folders.
+[2019.10.11-23.08.08:885][ 15]LogSlate: Took 0.112273 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
+[2019.10.11-23.08.09:603][ 16]LogSlate: Took 0.016977 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Italic.ttf' (157K)
+[2019.10.11-23.09.11:126][503]LogRenderer: Reallocating scene render targets to support 1312x712 Format 10 NumSamples 1 (Frame:1).
+[2019.10.11-23.10.37:151][480]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.11.46:826][922]LogSlate: Window 'ThirdPersonCharacter' being destroyed
+[2019.10.11-23.11.46:888][922]LogWorld: UWorld::CleanupWorld for World_3, bSessionEnded=true, bCleanupResources=true
