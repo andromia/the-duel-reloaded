@@ -1,4 +1,4 @@
-﻿Log file open, 10/11/19 18:05:32
+﻿Log file open, 10/11/19 18:15:30
 LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
 LogWindows: File 'aqProf.dll' does not exist
 LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
@@ -9,7 +9,7 @@ LogConsoleResponse: Display: Failed to find resolution value strings in scalabil
 LogInit: Display: Running engine for game: TDRProject
 LogPlatformFile: Not using cached read wrapper
 LogTaskGraph: Started task graph with 5 named threads and 20 total threads with 3 sets of task threads.
-LogStats: Stats thread started at 0.369355
+LogStats: Stats thread started at 0.059545
 LogD3D11RHI: Loaded GFSDK_Aftermath_Lib.x64.dll
 LogICUInternationalization: ICU TimeZone Detection - Raw Offset: -6:00, Platform Override: ''
 LogPluginManager: Mounting plugin Paper2D
@@ -157,398 +157,415 @@ LogInit: Presizing for max 16777216 objects, including 0 objects not considered 
 LogInit: Object subsystem initialized
 LogConfig: Setting CVar [[con.DebugEarlyDefault:1]]
 LogConfig: Setting CVar [[r.setres:1280x720]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[r.VSync:0]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[r.RHICmdBypass:0]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[r.GPUCrashDebugging:0]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:816][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
-[2019.10.11-23.05.32:816][  0]LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.MaxObjectsNotConsideredByGC:1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.SizeOfPermanentObjectPool:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.FlushStreamingOnGC:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.NumRetriesBeforeForcingGC:10]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.AllowParallelGC:1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.MaxObjectsInEditor:16777216]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.IncrementalBeginDestroyEnabled:1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.CreateGCClusters:1]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.MinGCClusterSize:5]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.ActorClusteringEnabled:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.BlueprintClusteringEnabled:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Setting CVar [[gc.UseDisregardForGCOnDedicatedServers:0]]
-[2019.10.11-23.05.32:817][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:817][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:818][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:818][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:4]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
-[2019.10.11-23.05.32:819][  0]LogInit: Selected Device Profile: [Windows]
-[2019.10.11-23.05.32:819][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
-[2019.10.11-23.05.32:826][  0]LogHAL: Display: Platform has ~ 32 GB [34303414272 / 34359738368 / 32], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
-[2019.10.11-23.05.32:826][  0]LogInit: Going up to parent DeviceProfile []
-[2019.10.11-23.05.32:826][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:4]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
-[2019.10.11-23.05.32:826][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
-[2019.10.11-23.05.32:827][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
-[2019.10.11-23.05.32:831][  0]LogConfig: Setting CVar [[net.UseAdaptiveNetUpdateFrequency:0]]
-[2019.10.11-23.05.32:831][  0]LogConfig: Setting CVar [[p.chaos.AllowCreatePhysxBodies:1]]
-[2019.10.11-23.05.32:831][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
-[2019.10.11-23.05.32:831][  0]LogInit: Computer: DESKTOP-2JN1KGB
-[2019.10.11-23.05.32:831][  0]LogInit: User: maxwe
-[2019.10.11-23.05.32:831][  0]LogInit: CPU Page size=4096, Cores=6
-[2019.10.11-23.05.32:831][  0]LogInit: High frequency timer resolution =10.000000 MHz
-[2019.10.11-23.05.32:831][  0]LogMemory: Memory total: Physical=31.9GB (32GB approx)
-[2019.10.11-23.05.32:831][  0]LogMemory: Platform Memory Stats for Windows
-[2019.10.11-23.05.32:831][  0]LogMemory: Process Physical Memory: 100.49 MB used, 100.50 MB peak
-[2019.10.11-23.05.32:831][  0]LogMemory: Process Virtual Memory: 100.21 MB used, 100.21 MB peak
-[2019.10.11-23.05.32:831][  0]LogMemory: Physical Memory: 4284.13 MB used,  28430.15 MB free, 32714.29 MB total
-[2019.10.11-23.05.32:831][  0]LogMemory: Virtual Memory: 4664.06 MB used,  134213064.00 MB free, 134217728.00 MB total
-[2019.10.11-23.05.32:835][  0]LogWindows: WindowsPlatformFeatures enabled
-[2019.10.11-23.05.33:126][  0]LogInit: Using OS detected language (en-US).
-[2019.10.11-23.05.33:126][  0]LogInit: Using OS detected locale (en-US).
-[2019.10.11-23.05.33:127][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
-[2019.10.11-23.05.33:326][  0]LogInit: Setting process to per monitor DPI aware
-[2019.10.11-23.05.33:726][  0]LogSlate: New Slate User Created.  User Index 0, Is Virtual User: 0
-[2019.10.11-23.05.33:726][  0]LogSlate: Slate User Registered.  User Index 0, Is Virtual User: 0
-[2019.10.11-23.05.36:619][  0]LogHMD: Failed to initialize OpenVR with code 110
-[2019.10.11-23.05.36:619][  0]LogD3D11RHI: D3D11 adapters:
-[2019.10.11-23.05.36:662][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 1080' (Feature Level 11_0)
-[2019.10.11-23.05.36:662][  0]LogD3D11RHI:       8079/0/16357 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
-[2019.10.11-23.05.36:664][  0]LogD3D11RHI:    1. 'Microsoft Basic Render Driver' (Feature Level 11_0)
-[2019.10.11-23.05.36:664][  0]LogD3D11RHI:       0/0/16357 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
-[2019.10.11-23.05.36:664][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
-[2019.10.11-23.05.36:669][  0]LogD3D11RHI: Creating new Direct3DDevice
-[2019.10.11-23.05.36:670][  0]LogD3D11RHI:     GPU DeviceId: 0x1b80 (for the marketing name, search the web for "GPU Device Id")
-[2019.10.11-23.05.36:676][  0]LogWindows: EnumDisplayDevices:
-[2019.10.11-23.05.36:676][  0]LogWindows:    0. 'NVIDIA GeForce GTX 1080' (P:1 D:1)
-[2019.10.11-23.05.36:676][  0]LogWindows:    1. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
-[2019.10.11-23.05.36:676][  0]LogWindows:    2. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
-[2019.10.11-23.05.36:676][  0]LogWindows:    3. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
-[2019.10.11-23.05.36:676][  0]LogWindows: DebugString: FoundDriverCount:4 
-[2019.10.11-23.05.36:676][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 1080
-[2019.10.11-23.05.36:687][  0]LogD3D11RHI:   Driver Version: 436.48 (internal:26.21.14.3648, unified:436.48)
-[2019.10.11-23.05.36:687][  0]LogD3D11RHI:      Driver Date: 9-26-2019
-[2019.10.11-23.05.36:687][  0]LogRHI: Texture pool is 5655 MB (70% of 8079 MB)
-[2019.10.11-23.05.36:719][  0]LogD3D11RHI: Async texture creation enabled
-[2019.10.11-23.05.36:900][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 1)
-[2019.10.11-23.05.37:919][  0]LogTemp: Display: Module 'AllDesktopTargetPlatform' loaded TargetPlatform 'AllDesktop'
-[2019.10.11-23.05.37:959][  0]LogTemp: Display: Module 'MacClientTargetPlatform' loaded TargetPlatform 'MacClient'
-[2019.10.11-23.05.37:974][  0]LogTemp: Display: Module 'MacNoEditorTargetPlatform' loaded TargetPlatform 'MacNoEditor'
-[2019.10.11-23.05.37:987][  0]LogTemp: Display: Module 'MacServerTargetPlatform' loaded TargetPlatform 'MacServer'
-[2019.10.11-23.05.38:015][  0]LogTemp: Display: Module 'MacTargetPlatform' loaded TargetPlatform 'Mac'
-[2019.10.11-23.05.38:033][  0]LogTemp: Display: Module 'WindowsClientTargetPlatform' loaded TargetPlatform 'WindowsClient'
-[2019.10.11-23.05.38:050][  0]LogTemp: Display: Module 'WindowsNoEditorTargetPlatform' loaded TargetPlatform 'WindowsNoEditor'
-[2019.10.11-23.05.38:065][  0]LogTemp: Display: Module 'WindowsServerTargetPlatform' loaded TargetPlatform 'WindowsServer'
-[2019.10.11-23.05.38:074][  0]LogTemp: Display: Module 'WindowsTargetPlatform' loaded TargetPlatform 'Windows'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ASTC'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ATC'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_DXT'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1a'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC2'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_PVRTC'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'AndroidClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ASTCClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ATCClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_DXTClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1Client'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1aClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC2Client'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_PVRTCClient'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_Multi'
-[2019.10.11-23.05.38:139][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_MultiClient'
-[2019.10.11-23.05.38:181][  0]LogTemp: Display: Module 'HTML5TargetPlatform' loaded TargetPlatform 'HTML5'
-[2019.10.11-23.05.38:233][  0]LogTemp: Display: Module 'IOSTargetPlatform' loaded TargetPlatform 'IOSClient'
-[2019.10.11-23.05.38:233][  0]LogTemp: Display: Module 'IOSTargetPlatform' loaded TargetPlatform 'IOS'
-[2019.10.11-23.05.38:250][  0]LogTemp: Display: Module 'TVOSTargetPlatform' loaded TargetPlatform 'TVOSClient'
-[2019.10.11-23.05.38:250][  0]LogTemp: Display: Module 'TVOSTargetPlatform' loaded TargetPlatform 'TVOS'
-[2019.10.11-23.05.38:266][  0]LogTemp: Display: Module 'LinuxClientTargetPlatform' loaded TargetPlatform 'LinuxClient'
-[2019.10.11-23.05.38:278][  0]LogTemp: Display: Module 'LinuxNoEditorTargetPlatform' loaded TargetPlatform 'LinuxNoEditor'
-[2019.10.11-23.05.38:291][  0]LogTemp: Display: Module 'LinuxServerTargetPlatform' loaded TargetPlatform 'LinuxServer'
-[2019.10.11-23.05.38:313][  0]LogTemp: Display: Module 'LinuxTargetPlatform' loaded TargetPlatform 'Linux'
-[2019.10.11-23.05.38:339][  0]LogTemp: Display: Module 'LuminTargetPlatform' loaded TargetPlatform 'Lumin'
-[2019.10.11-23.05.38:339][  0]LogTemp: Display: Module 'LuminTargetPlatform' loaded TargetPlatform 'LuminClient'
-[2019.10.11-23.05.38:339][  0]LogTargetPlatformManager: Display: Building Assets For Windows
-[2019.10.11-23.05.38:456][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
-[2019.10.11-23.05.38:856][  0]LogShaderCompilers: Guid format shader working directory is -37 characters bigger than the processId version (../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Intermediate/Shaders/WorkingDirectory/12584/).
-[2019.10.11-23.05.38:857][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/maxwe/AppData/Local/Temp/UnrealShaderWorkingDir/1FE0667A4A31BDF5DF44188FB4373C09/'.
-[2019.10.11-23.05.38:876][  0]LogXGEController: Cleaning working directory: C:/Users/maxwe/AppData/Local/Temp/UnrealXGEWorkingDir/
-[2019.10.11-23.05.38:876][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
-[2019.10.11-23.05.38:876][  0]LogShaderCompilers: Cannot use XGE Shader Compiler as Incredibuild is not installed on this machine.
-[2019.10.11-23.05.38:876][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
-[2019.10.11-23.05.42:101][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: Loaded boot cache 0.68s 73MB C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc.
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file ../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file ../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
-[2019.10.11-23.05.42:792][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
-[2019.10.11-23.05.42:844][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
-[2019.10.11-23.05.42:844][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
-[2019.10.11-23.05.42:844][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchical cache Hierarchy.
-[2019.10.11-23.05.42:869][  0]LogDerivedDataCache: Using Local data cache path C:/Users/maxwe/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
-[2019.10.11-23.05.42:869][  0]LogDerivedDataCache: Shared data cache path not found in *engine.ini, will not use an Shared cache.
-[2019.10.11-23.05.42:869][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchical cache Hierarchy.
-[2019.10.11-23.05.42:926][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
-[2019.10.11-23.05.42:967][  0]LogSlate: Using FreeType 2.6.0
-[2019.10.11-23.05.43:020][  0]LogSlate: SlateFontServices - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
-[2019.10.11-23.05.44:121][  0]LogAssetRegistry: FAssetRegistry took 0.0024 seconds to start up
-[2019.10.11-23.05.50:023][  0]LogInit: Selected Device Profile: [Windows]
-[2019.10.11-23.05.51:665][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
-[2019.10.11-23.05.51:665][  0]LogMeshReduction: Using SimplygonMeshReduction for automatic skeletal mesh reduction
-[2019.10.11-23.05.51:665][  0]LogMeshReduction: Using ProxyLODMeshReduction for automatic mesh merging
-[2019.10.11-23.05.51:665][  0]LogMeshReduction: No distributed automatic mesh merging module available
-[2019.10.11-23.05.51:665][  0]LogMeshMerging: No distributed automatic mesh merging module available
-[2019.10.11-23.05.52:227][  0]LogNetVersion: TDRProject 1.0.0, NetCL: 8386587, EngineNetVer: 11, GameNetVer: 0 (Checksum: 3658010036)
-[2019.10.11-23.05.56:781][  0]LogPackageLocalizationCache: Processed 12 localized package path(s) for 1 prioritized culture(s) in 0.069841 seconds
-[2019.10.11-23.05.56:802][  0]LogUObjectArray: 43444 objects as part of root set at end of initial load.
-[2019.10.11-23.05.56:802][  0]LogUObjectAllocator: 7548648 out of 0 bytes used by permanent object pool.
-[2019.10.11-23.05.56:802][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
-[2019.10.11-23.06.19:876][  0]LogTcpMessaging: Initializing TcpMessaging bridge
-[2019.10.11-23.06.19:910][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
-[2019.10.11-23.06.20:644][  0]SourceControl: Source control is disabled
-[2019.10.11-23.06.20:673][  0]SourceControl: Source control is disabled
-[2019.10.11-23.06.20:834][  0]SourceControl: Source control is disabled
-[2019.10.11-23.06.20:853][  0]SourceControl: Source control is disabled
-[2019.10.11-23.06.22:570][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
-[2019.10.11-23.06.23:378][  0]LogOcInput: OculusInput pre-init called
-[2019.10.11-23.06.23:480][  0]LogWindows: Failed to load 'OVRPlugin.dll' (GetLastError=126)
-[2019.10.11-23.06.23:480][  0]LogWindows: File 'OVRPlugin.dll' does not exist
-[2019.10.11-23.06.25:542][  0]LogEngine: Initializing Engine...
-[2019.10.11-23.06.25:603][  0]LogHMD: Failed to initialize OpenVR with code 110
-[2019.10.11-23.06.25:738][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.106 s
-[2019.10.11-23.06.26:025][  0]LogInit: Initializing FReadOnlyCVARCache
-[2019.10.11-23.06.26:685][  0]LogAIModule: Creating AISystem for world Untitled
-[2019.10.11-23.06.26:887][  0]LogInit: XAudio2 using 'Speakers (Realtek High Definition Audio)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
-[2019.10.11-23.06.26:916][  0]LogInit: FAudioDevice initialized.
-[2019.10.11-23.06.26:917][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
-[2019.10.11-23.06.27:273][  0]LogDerivedDataCache: Saved boot cache 0.36s 73MB C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc.
-[2019.10.11-23.06.27:281][  0]LogInit: Texture streaming: Enabled
-[2019.10.11-23.06.27:812][  0]LogEngineSessionManager: EngineSessionManager initialized
-[2019.10.11-23.06.28:533][  0]LogInit: Transaction tracking system initialized
-[2019.10.11-23.06.29:297][  0]BlueprintLog: New page: Editor Load
-[2019.10.11-23.06.30:770][  0]LocalizationService: Localization service is disabled
-[2019.10.11-23.06.33:297][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/' took 0.04s
-[2019.10.11-23.06.33:297][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
-[2019.10.11-23.06.33:297][  0]LogCook: Display: Mobile HDR setting 1
-[2019.10.11-23.06.39:916][  0]SourceControl: Source control is disabled
-[2019.10.11-23.06.39:974][  0]Cmd: MAP LOAD FILE="../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/ThirdPersonBP/Maps/ThirdPersonExampleMap.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=3
-[2019.10.11-23.06.40:024][  0]LightingResults: New page: Lighting Build
-[2019.10.11-23.06.40:069][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
-[2019.10.11-23.06.40:168][  0]MapCheck: New page: Map Check
-[2019.10.11-23.06.40:168][  0]LightingResults: New page: Lighting Build
-[2019.10.11-23.06.40:307][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.24ms
-[2019.10.11-23.06.42:593][  0]LogAIModule: Creating AISystem for world ThirdPersonExampleMap
-[2019.10.11-23.06.43:225][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
-[2019.10.11-23.06.43:333][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.59ms
-[2019.10.11-23.06.43:333][  0]Cmd: MAP CHECKDEP NOCLEARLOG
-[2019.10.11-23.06.43:333][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.135ms to complete.
-[2019.10.11-23.06.43:333][  0]LogFileHelpers: Loading map 'ThirdPersonExampleMap' took 3.393
-[2019.10.11-23.06.45:026][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2019.10.11-23.06.45:039][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2019.10.11-23.06.45:044][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2019.10.11-23.06.45:050][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2019.10.11-23.06.45:218][  0]LogCollectionManager: Loaded 0 collections in 0.001688 seconds
-[2019.10.11-23.06.45:644][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Collections/' took 0.00s
-[2019.10.11-23.06.45:644][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/Developers/maxwe/Collections/' took 0.00s
-[2019.10.11-23.06.45:644][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/Collections/' took 0.00s
-[2019.10.11-23.06.45:644][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000002 seconds
-[2019.10.11-23.06.45:657][  0]LogContentBrowser: Native class hierarchy populated in 0.0092 seconds. Added 2863 classes and 680 folders.
-[2019.10.11-23.06.46:227][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2019.10.11-23.06.53:866][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2019.10.11-23.06.54:024][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0002 seconds. Added 1 classes and 2 folders.
-[2019.10.11-23.06.54:901][  0]LogSlate: Took 0.029320 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
-[2019.10.11-23.06.54:920][  0]LogSlate: Took 0.018289 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
-[2019.10.11-23.06.54:940][  0]LogSlate: Took 0.016212 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
-[2019.10.11-23.06.55:772][  0]LogRenderer: Reallocating scene render targets to support 1208x572 Format 10 NumSamples 1 (Frame:1).
-[2019.10.11-23.06.56:763][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2019.10.11-23.06.56:763][  0]LogLoad: (Engine Initialization) Total time: 96.32 seconds
-[2019.10.11-23.06.56:763][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
-[2019.10.11-23.06.57:300][  0]LogContentStreaming: Texture pool size now 1000 MB
-[2019.10.11-23.06.57:546][  0]LogSlate: Took 0.016141 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
-[2019.10.11-23.06.57:758][  1]LogAssetRegistry: Asset discovery search completed in 73.6375 seconds
-[2019.10.11-23.06.57:761][  1]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000004 seconds (found 0 objects)
-[2019.10.11-23.06.57:761][  1]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000043 seconds (updated 0 objects)
-[2019.10.11-23.07.11:420][ 42]LogSlate: FSceneViewport::OnFocusLost() reason 0
-[2019.10.11-23.07.41:618][886]LogSlate: FSceneViewport::OnFocusLost() reason 0
-[2019.10.11-23.07.52:320][151]LogEditorViewport: Clicking on Actor (LMB): ThirdPersonCharacter_C (ThirdPersonCharacter)
-[2019.10.11-23.08.00:348][  4]LogSlate: FSceneViewport::OnFocusLost() reason 0
-[2019.10.11-23.08.00:443][ 15]LogSlate: Took 0.000139 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
-[2019.10.11-23.08.00:462][ 15]LogAssetEditorManager: Opening Asset editor for Blueprint /Game/ThirdPersonBP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter
-[2019.10.11-23.08.03:389][ 15]LogContentBrowser: Native class hierarchy updated for 'BlueprintGraph' in 0.0005 seconds. Added 121 classes and 0 folders.
-[2019.10.11-23.08.08:885][ 15]LogSlate: Took 0.112273 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
-[2019.10.11-23.08.09:603][ 16]LogSlate: Took 0.016977 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Italic.ttf' (157K)
-[2019.10.11-23.09.11:126][503]LogRenderer: Reallocating scene render targets to support 1312x712 Format 10 NumSamples 1 (Frame:1).
-[2019.10.11-23.10.37:151][480]LogSlate: FSceneViewport::OnFocusLost() reason 0
-[2019.10.11-23.11.46:826][922]LogSlate: Window 'ThirdPersonCharacter' being destroyed
-[2019.10.11-23.11.46:888][922]LogWorld: UWorld::CleanupWorld for World_3, bSessionEnded=true, bCleanupResources=true
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[r.VSync:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[r.RHICmdBypass:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[r.GPUCrashDebugging:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.MaxObjectsNotConsideredByGC:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.SizeOfPermanentObjectPool:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.FlushStreamingOnGC:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.NumRetriesBeforeForcingGC:10]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.AllowParallelGC:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.MaxObjectsInEditor:16777216]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.IncrementalBeginDestroyEnabled:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.CreateGCClusters:1]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.MinGCClusterSize:5]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.ActorClusteringEnabled:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.BlueprintClusteringEnabled:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Setting CVar [[gc.UseDisregardForGCOnDedicatedServers:0]]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:945][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:947][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:4]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
+[2019.10.11-23.15.30:947][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2019.10.11-23.15.30:948][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2019.10.11-23.15.30:948][  0]LogInit: Selected Device Profile: [Windows]
+[2019.10.11-23.15.30:948][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2019.10.11-23.15.30:950][  0]LogHAL: Display: Platform has ~ 32 GB [34303414272 / 34359738368 / 32], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
+[2019.10.11-23.15.30:950][  0]LogInit: Going up to parent DeviceProfile []
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:4]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:4]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:-1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.LensFlareQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.BloomQuality:5]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:100]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:64]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SSR.Quality:3]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SceneColorFormat:4]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Scalability.ini]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2019.10.11-23.15.30:951][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2019.10.11-23.15.30:952][  0]LogConfig: Setting CVar [[net.UseAdaptiveNetUpdateFrequency:0]]
+[2019.10.11-23.15.30:952][  0]LogConfig: Setting CVar [[p.chaos.AllowCreatePhysxBodies:1]]
+[2019.10.11-23.15.30:952][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Config/Windows/Engine.ini]
+[2019.10.11-23.15.30:952][  0]LogInit: Computer: DESKTOP-2JN1KGB
+[2019.10.11-23.15.30:952][  0]LogInit: User: maxwe
+[2019.10.11-23.15.30:952][  0]LogInit: CPU Page size=4096, Cores=6
+[2019.10.11-23.15.30:952][  0]LogInit: High frequency timer resolution =10.000000 MHz
+[2019.10.11-23.15.30:952][  0]LogMemory: Memory total: Physical=31.9GB (32GB approx)
+[2019.10.11-23.15.30:952][  0]LogMemory: Platform Memory Stats for Windows
+[2019.10.11-23.15.30:952][  0]LogMemory: Process Physical Memory: 100.49 MB used, 100.49 MB peak
+[2019.10.11-23.15.30:952][  0]LogMemory: Process Virtual Memory: 100.30 MB used, 100.30 MB peak
+[2019.10.11-23.15.30:952][  0]LogMemory: Physical Memory: 4534.00 MB used,  28180.29 MB free, 32714.29 MB total
+[2019.10.11-23.15.30:952][  0]LogMemory: Virtual Memory: 4664.06 MB used,  134213064.00 MB free, 134217728.00 MB total
+[2019.10.11-23.15.30:954][  0]LogWindows: WindowsPlatformFeatures enabled
+[2019.10.11-23.15.30:976][  0]LogInit: Using OS detected language (en-US).
+[2019.10.11-23.15.30:976][  0]LogInit: Using OS detected locale (en-US).
+[2019.10.11-23.15.30:976][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2019.10.11-23.15.31:113][  0]LogInit: Setting process to per monitor DPI aware
+[2019.10.11-23.15.31:139][  0]LogSlate: New Slate User Created.  User Index 0, Is Virtual User: 0
+[2019.10.11-23.15.31:139][  0]LogSlate: Slate User Registered.  User Index 0, Is Virtual User: 0
+[2019.10.11-23.15.31:256][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2019.10.11-23.15.31:256][  0]LogD3D11RHI: D3D11 adapters:
+[2019.10.11-23.15.31:299][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 1080' (Feature Level 11_0)
+[2019.10.11-23.15.31:299][  0]LogD3D11RHI:       8079/0/16357 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
+[2019.10.11-23.15.31:301][  0]LogD3D11RHI:    1. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2019.10.11-23.15.31:301][  0]LogD3D11RHI:       0/0/16357 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2019.10.11-23.15.31:301][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2019.10.11-23.15.31:307][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2019.10.11-23.15.31:307][  0]LogD3D11RHI:     GPU DeviceId: 0x1b80 (for the marketing name, search the web for "GPU Device Id")
+[2019.10.11-23.15.31:307][  0]LogWindows: EnumDisplayDevices:
+[2019.10.11-23.15.31:307][  0]LogWindows:    0. 'NVIDIA GeForce GTX 1080' (P:1 D:1)
+[2019.10.11-23.15.31:307][  0]LogWindows:    1. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
+[2019.10.11-23.15.31:307][  0]LogWindows:    2. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
+[2019.10.11-23.15.31:307][  0]LogWindows:    3. 'NVIDIA GeForce GTX 1080' (P:0 D:0)
+[2019.10.11-23.15.31:308][  0]LogWindows: DebugString: FoundDriverCount:4 
+[2019.10.11-23.15.31:308][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 1080
+[2019.10.11-23.15.31:308][  0]LogD3D11RHI:   Driver Version: 436.48 (internal:26.21.14.3648, unified:436.48)
+[2019.10.11-23.15.31:308][  0]LogD3D11RHI:      Driver Date: 9-26-2019
+[2019.10.11-23.15.31:308][  0]LogRHI: Texture pool is 5655 MB (70% of 8079 MB)
+[2019.10.11-23.15.31:338][  0]LogD3D11RHI: Async texture creation enabled
+[2019.10.11-23.15.31:358][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 1)
+[2019.10.11-23.15.31:710][  0]LogTemp: Display: Module 'AllDesktopTargetPlatform' loaded TargetPlatform 'AllDesktop'
+[2019.10.11-23.15.31:717][  0]LogTemp: Display: Module 'MacClientTargetPlatform' loaded TargetPlatform 'MacClient'
+[2019.10.11-23.15.31:725][  0]LogTemp: Display: Module 'MacNoEditorTargetPlatform' loaded TargetPlatform 'MacNoEditor'
+[2019.10.11-23.15.31:732][  0]LogTemp: Display: Module 'MacServerTargetPlatform' loaded TargetPlatform 'MacServer'
+[2019.10.11-23.15.31:739][  0]LogTemp: Display: Module 'MacTargetPlatform' loaded TargetPlatform 'Mac'
+[2019.10.11-23.15.31:746][  0]LogTemp: Display: Module 'WindowsClientTargetPlatform' loaded TargetPlatform 'WindowsClient'
+[2019.10.11-23.15.31:753][  0]LogTemp: Display: Module 'WindowsNoEditorTargetPlatform' loaded TargetPlatform 'WindowsNoEditor'
+[2019.10.11-23.15.31:761][  0]LogTemp: Display: Module 'WindowsServerTargetPlatform' loaded TargetPlatform 'WindowsServer'
+[2019.10.11-23.15.31:764][  0]LogTemp: Display: Module 'WindowsTargetPlatform' loaded TargetPlatform 'Windows'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ASTC'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ATC'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_DXT'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1a'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC2'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_PVRTC'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'AndroidClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ASTCClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ATCClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_DXTClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1Client'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC1aClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_ETC2Client'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_PVRTCClient'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_Multi'
+[2019.10.11-23.15.31:790][  0]LogTemp: Display: Module 'AndroidTargetPlatform' loaded TargetPlatform 'Android_MultiClient'
+[2019.10.11-23.15.31:791][  0]LogTemp: Display: Module 'HTML5TargetPlatform' loaded TargetPlatform 'HTML5'
+[2019.10.11-23.15.31:805][  0]LogTemp: Display: Module 'IOSTargetPlatform' loaded TargetPlatform 'IOSClient'
+[2019.10.11-23.15.31:805][  0]LogTemp: Display: Module 'IOSTargetPlatform' loaded TargetPlatform 'IOS'
+[2019.10.11-23.15.31:816][  0]LogTemp: Display: Module 'TVOSTargetPlatform' loaded TargetPlatform 'TVOSClient'
+[2019.10.11-23.15.31:816][  0]LogTemp: Display: Module 'TVOSTargetPlatform' loaded TargetPlatform 'TVOS'
+[2019.10.11-23.15.31:822][  0]LogTemp: Display: Module 'LinuxClientTargetPlatform' loaded TargetPlatform 'LinuxClient'
+[2019.10.11-23.15.31:827][  0]LogTemp: Display: Module 'LinuxNoEditorTargetPlatform' loaded TargetPlatform 'LinuxNoEditor'
+[2019.10.11-23.15.31:833][  0]LogTemp: Display: Module 'LinuxServerTargetPlatform' loaded TargetPlatform 'LinuxServer'
+[2019.10.11-23.15.31:839][  0]LogTemp: Display: Module 'LinuxTargetPlatform' loaded TargetPlatform 'Linux'
+[2019.10.11-23.15.31:857][  0]LogTemp: Display: Module 'LuminTargetPlatform' loaded TargetPlatform 'Lumin'
+[2019.10.11-23.15.31:858][  0]LogTemp: Display: Module 'LuminTargetPlatform' loaded TargetPlatform 'LuminClient'
+[2019.10.11-23.15.31:858][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2019.10.11-23.15.31:865][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+[2019.10.11-23.15.31:908][  0]LogShaderCompilers: Guid format shader working directory is -35 characters bigger than the processId version (../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Intermediate/Shaders/WorkingDirectory/808/).
+[2019.10.11-23.15.31:908][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/maxwe/AppData/Local/Temp/UnrealShaderWorkingDir/76DA88C740C18BE4DBEEFBB37CA459A2/'.
+[2019.10.11-23.15.31:910][  0]LogXGEController: Cleaning working directory: C:/Users/maxwe/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2019.10.11-23.15.31:910][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
+[2019.10.11-23.15.31:910][  0]LogShaderCompilers: Cannot use XGE Shader Compiler as Incredibuild is not installed on this machine.
+[2019.10.11-23.15.31:910][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2019.10.11-23.15.32:390][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: Loaded boot cache 0.04s 73MB C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc.
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file ../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file ../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2019.10.11-23.15.32:430][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2019.10.11-23.15.32:440][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2019.10.11-23.15.32:440][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2019.10.11-23.15.32:440][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchical cache Hierarchy.
+[2019.10.11-23.15.32:441][  0]LogDerivedDataCache: Using Local data cache path C:/Users/maxwe/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2019.10.11-23.15.32:441][  0]LogDerivedDataCache: Shared data cache path not found in *engine.ini, will not use an Shared cache.
+[2019.10.11-23.15.32:441][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchical cache Hierarchy.
+[2019.10.11-23.15.32:457][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2019.10.11-23.15.32:459][  0]LogSlate: Using FreeType 2.6.0
+[2019.10.11-23.15.32:460][  0]LogSlate: SlateFontServices - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2019.10.11-23.15.32:503][  0]LogAssetRegistry: FAssetRegistry took 0.0019 seconds to start up
+[2019.10.11-23.15.32:707][  0]LogInit: Selected Device Profile: [Windows]
+[2019.10.11-23.15.32:826][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2019.10.11-23.15.32:826][  0]LogMeshReduction: Using SimplygonMeshReduction for automatic skeletal mesh reduction
+[2019.10.11-23.15.32:826][  0]LogMeshReduction: Using ProxyLODMeshReduction for automatic mesh merging
+[2019.10.11-23.15.32:826][  0]LogMeshReduction: No distributed automatic mesh merging module available
+[2019.10.11-23.15.32:826][  0]LogMeshMerging: No distributed automatic mesh merging module available
+[2019.10.11-23.15.32:833][  0]LogNetVersion: TDRProject 1.0.0, NetCL: 8386587, EngineNetVer: 11, GameNetVer: 0 (Checksum: 3658010036)
+[2019.10.11-23.15.33:161][  0]LogPackageLocalizationCache: Processed 12 localized package path(s) for 1 prioritized culture(s) in 0.042631 seconds
+[2019.10.11-23.15.33:166][  0]LogUObjectArray: 43444 objects as part of root set at end of initial load.
+[2019.10.11-23.15.33:166][  0]LogUObjectAllocator: 7548648 out of 0 bytes used by permanent object pool.
+[2019.10.11-23.15.33:166][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2019.10.11-23.15.33:835][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2019.10.11-23.15.33:838][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2019.10.11-23.15.33:881][  0]SourceControl: Source control is disabled
+[2019.10.11-23.15.33:882][  0]SourceControl: Source control is disabled
+[2019.10.11-23.15.33:883][  0]SourceControl: Source control is disabled
+[2019.10.11-23.15.33:883][  0]SourceControl: Source control is disabled
+[2019.10.11-23.15.33:955][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2019.10.11-23.15.34:039][  0]LogOcInput: OculusInput pre-init called
+[2019.10.11-23.15.34:045][  0]LogWindows: Failed to load 'OVRPlugin.dll' (GetLastError=126)
+[2019.10.11-23.15.34:045][  0]LogWindows: File 'OVRPlugin.dll' does not exist
+[2019.10.11-23.15.34:098][  0]LogEngine: Initializing Engine...
+[2019.10.11-23.15.34:099][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2019.10.11-23.15.34:100][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
+[2019.10.11-23.15.34:275][  0]LogInit: Initializing FReadOnlyCVARCache
+[2019.10.11-23.15.34:286][  0]LogAIModule: Creating AISystem for world Untitled
+[2019.10.11-23.15.34:302][  0]LogInit: XAudio2 using 'Speakers (Realtek High Definition Audio)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2019.10.11-23.15.34:324][  0]LogInit: FAudioDevice initialized.
+[2019.10.11-23.15.34:324][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
+[2019.10.11-23.15.34:501][  0]LogDerivedDataCache: Saved boot cache 0.18s 73MB C:/Users/maxwe/AppData/Local/UnrealEngine/4.23/DerivedDataCache/Boot.ddc.
+[2019.10.11-23.15.34:507][  0]LogInit: Texture streaming: Enabled
+[2019.10.11-23.15.34:522][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2019.10.11-23.15.34:576][  0]LogInit: Transaction tracking system initialized
+[2019.10.11-23.15.34:603][  0]BlueprintLog: New page: Editor Load
+[2019.10.11-23.15.34:670][  0]LocalizationService: Localization service is disabled
+[2019.10.11-23.15.34:862][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/' took 0.00s
+[2019.10.11-23.15.34:862][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2019.10.11-23.15.34:862][  0]LogCook: Display: Mobile HDR setting 1
+[2019.10.11-23.15.35:010][  0]SourceControl: Source control is disabled
+[2019.10.11-23.15.35:010][  0]Cmd: MAP LOAD FILE="../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/ThirdPersonBP/Maps/ThirdPersonExampleMap.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=3
+[2019.10.11-23.15.35:010][  0]LightingResults: New page: Lighting Build
+[2019.10.11-23.15.35:013][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
+[2019.10.11-23.15.35:013][  0]MapCheck: New page: Map Check
+[2019.10.11-23.15.35:013][  0]LightingResults: New page: Lighting Build
+[2019.10.11-23.15.35:034][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.27ms
+[2019.10.11-23.15.35:224][  0]LogAIModule: Creating AISystem for world ThirdPersonExampleMap
+[2019.10.11-23.15.35:230][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2019.10.11-23.15.35:253][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.58ms
+[2019.10.11-23.15.35:253][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2019.10.11-23.15.35:254][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.146ms to complete.
+[2019.10.11-23.15.35:254][  0]LogFileHelpers: Loading map 'ThirdPersonExampleMap' took 0.244
+[2019.10.11-23.15.35:338][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.35:344][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.35:350][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.35:355][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.35:361][  0]LogCollectionManager: Loaded 0 collections in 0.001739 seconds
+[2019.10.11-23.15.35:365][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/Collections/' took 0.00s
+[2019.10.11-23.15.35:365][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/Developers/maxwe/Collections/' took 0.00s
+[2019.10.11-23.15.35:365][  0]LogFileCache: Scanning file cache for directory 'C:/Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/Collections/' took 0.00s
+[2019.10.11-23.15.35:365][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000001 seconds
+[2019.10.11-23.15.35:372][  0]LogContentBrowser: Native class hierarchy populated in 0.0063 seconds. Added 2863 classes and 680 folders.
+[2019.10.11-23.15.35:377][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0002 seconds. Added 0 classes and 0 folders.
+[2019.10.11-23.15.35:411][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0002 seconds. Added 0 classes and 0 folders.
+[2019.10.11-23.15.35:415][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0002 seconds. Added 1 classes and 2 folders.
+[2019.10.11-23.15.35:426][  0]LogSlate: Took 0.000141 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2019.10.11-23.15.35:428][  0]LogSlate: Took 0.000166 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2019.10.11-23.15.35:431][  0]LogSlate: Took 0.000156 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2019.10.11-23.15.35:478][  0]LogRenderer: Reallocating scene render targets to support 1208x572 Format 10 NumSamples 1 (Frame:1).
+[2019.10.11-23.15.35:541][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0002 seconds. Added 0 classes and 0 folders.
+[2019.10.11-23.15.35:541][  0]LogLoad: (Engine Initialization) Total time: 5.63 seconds
+[2019.10.11-23.15.35:541][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2019.10.11-23.15.35:576][  0]LogAssetRegistry: Asset discovery search completed in 3.0734 seconds
+[2019.10.11-23.15.35:578][  0]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000003 seconds (found 0 objects)
+[2019.10.11-23.15.35:578][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000048 seconds (updated 0 objects)
+[2019.10.11-23.15.35:579][  0]LogContentStreaming: Texture pool size now 1000 MB
+[2019.10.11-23.15.35:590][  0]LogSlate: Took 0.000126 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2019.10.11-23.15.38:115][302]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.15.38:214][314]LogTemp: Repeating last play command: Selected Viewport
+[2019.10.11-23.15.38:224][314]LogBlueprintUserMessages: Early PlayInEditor Detection: Level '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel' has LevelScriptBlueprint '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap' with GeneratedClass '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap_C' with ClassGeneratedBy '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap'
+[2019.10.11-23.15.38:244][314]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2019.10.11-23.15.38:269][314]PIE: New page: PIE session: ThirdPersonExampleMap (Oct 11, 2019, 1:15:38 PM)
+[2019.10.11-23.15.38:293][314]LogOnline: OSS: Creating online subsystem instance for: NULL
+[2019.10.11-23.15.38:310][314]LogPlayLevel: Creating play world package: /Game/ThirdPersonBP/Maps/UEDPIE_0_ThirdPersonExampleMap
+[2019.10.11-23.15.38:321][314]LogPlayLevel: PIE: StaticDuplicateObject took: (0.010612s)
+[2019.10.11-23.15.38:321][314]LogAIModule: Creating AISystem for world ThirdPersonExampleMap
+[2019.10.11-23.15.38:322][314]LogPlayLevel: PIE: World Init took: (0.000809s)
+[2019.10.11-23.15.38:322][314]LogPlayLevel: PIE: Created PIE world by copying editor world from /Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap to /Game/ThirdPersonBP/Maps/UEDPIE_0_ThirdPersonExampleMap.ThirdPersonExampleMap (0.011671s)
+[2019.10.11-23.15.38:341][314]LogUObjectHash: Compacting FUObjectHashTables data took   1.05ms
+[2019.10.11-23.15.38:361][314]LogInit: XAudio2 using 'Speakers (Realtek High Definition Audio)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2019.10.11-23.15.38:377][314]LogInit: FAudioDevice initialized.
+[2019.10.11-23.15.38:423][314]LogLoad: Game class is 'ThirdPersonGameMode_C'
+[2019.10.11-23.15.38:468][314]LogWorld: Bringing World /Game/ThirdPersonBP/Maps/UEDPIE_0_ThirdPersonExampleMap.ThirdPersonExampleMap up for play (max tick rate 0) at 2019.10.11-18.15.38
+[2019.10.11-23.15.38:469][314]LogWorld: Bringing up level for play took: 0.009469
+[2019.10.11-23.15.38:469][314]LogOnline: OSS: Creating online subsystem instance for: :Context_1
+[2019.10.11-23.15.38:630][314]LogContentBrowser: Native class hierarchy updated for 'MovieSceneCapture' in 0.0002 seconds. Added 20 classes and 0 folders.
+[2019.10.11-23.15.38:638][314]PIE: Play in editor start time for /Game/ThirdPersonBP/Maps/UEDPIE_0_ThirdPersonExampleMap 0.434
+[2019.10.11-23.15.38:638][314]LogBlueprintUserMessages: Late PlayInEditor Detection: Level '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel' has LevelScriptBlueprint '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap' with GeneratedClass '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap_C' with ClassGeneratedBy '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap'
+[2019.10.11-23.15.50:511][734]LogBlueprintUserMessages: Early EndPlayMap Detection: Level '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel' has LevelScriptBlueprint '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap' with GeneratedClass '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap_C' with ClassGeneratedBy '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap'
+[2019.10.11-23.15.50:511][734]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.50:511][734]LogWorld: BeginTearingDown for /Game/ThirdPersonBP/Maps/UEDPIE_0_ThirdPersonExampleMap
+[2019.10.11-23.15.50:511][734]LogWorld: UWorld::CleanupWorld for ThirdPersonExampleMap, bSessionEnded=true, bCleanupResources=true
+[2019.10.11-23.15.50:515][734]LogPlayLevel: Display: Shutting down PIE online subsystems
+[2019.10.11-23.15.50:515][734]LogBlueprintUserMessages: Late EndPlayMap Detection: Level '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel' has LevelScriptBlueprint '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap' with GeneratedClass '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap_C' with ClassGeneratedBy '/Game/ThirdPersonBP/Maps/ThirdPersonExampleMap.ThirdPersonExampleMap:PersistentLevel.ThirdPersonExampleMap'
+[2019.10.11-23.15.50:539][734]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2019.10.11-23.15.50:541][734]LogUObjectHash: Compacting FUObjectHashTables data took   1.42ms
+[2019.10.11-23.15.50:615][742]LogPlayLevel: Display: Destroying online subsystem :Context_1
