@@ -569,3 +569,23 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2019.10.11-23.15.50:539][734]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
 [2019.10.11-23.15.50:541][734]LogUObjectHash: Compacting FUObjectHashTables data took   1.42ms
 [2019.10.11-23.15.50:615][742]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2019.10.11-23.17.08:877][222]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.17.17:081][196]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.17.21:730][746]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.28:601][568]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.28:671][576]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.30:669][812]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.32:280][  5]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.32:916][ 81]LogSlate: FSceneViewport::OnFocusLost() reason 5
+[2019.10.11-23.17.37:347][613]LogEditorViewport: Clicking on Actor (LMB): ThirdPersonCharacter_C (ThirdPersonCharacter)
+[2019.10.11-23.17.38:840][784]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.17.39:576][872]LogSlate: Took 0.000171 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2019.10.11-23.17.39:580][872]LogAssetEditorManager: Opening Asset editor for Blueprint /Game/ThirdPersonBP/Blueprints/ThirdPersonCharacter.ThirdPersonCharacter
+[2019.10.11-23.17.39:759][872]LogContentBrowser: Native class hierarchy updated for 'BlueprintGraph' in 0.0004 seconds. Added 121 classes and 0 folders.
+[2019.10.11-23.17.40:385][872]LogSlate: Took 0.000165 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
+[2019.10.11-23.17.40:454][873]LogSlate: Took 0.000214 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Italic.ttf' (157K)
+[2019.10.11-23.18.11:571][187]BlueprintLog: New page: Compile ThirdPersonCharacter
+[2019.10.11-23.18.11:901][187]LogUObjectHash: Compacting FUObjectHashTables data took   2.77ms
+[2019.10.11-23.18.12:579][242]LogSavePackage: Moving '../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Saved/ThirdPersonCharacter7A8BD85848E65FC1FC10DA8BC6615CAE.tmp' to '../../../../../../Users/maxwe/OneDrive/Documents/GitHub/TheDuelReloaded/TDRProject/Content/ThirdPersonBP/Blueprints/ThirdPersonCharacter.uasset'
+[2019.10.11-23.18.14:204][429]LogSlate: FSceneViewport::OnFocusLost() reason 0
+[2019.10.11-23.18.17:047][755]LogRenderer: Reallocating scene render targets to support 1312x712 Format 10 NumSamples 1 (Frame:1).
