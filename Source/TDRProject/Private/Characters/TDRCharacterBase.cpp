@@ -8,6 +8,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/Controller.h"
 #include "DrawDebugHelpers.h"
+#include "..\..\Public\Characters\TDRCharacterBase.h"
 
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
@@ -111,4 +112,5 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("TurnAtRate", this, &ATDRCharacterBase::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
 }
+
 
