@@ -9,12 +9,13 @@
 #include "GameFramework/Controller.h"
 #include "DrawDebugHelpers.h"
 #include "..\..\Public\Characters\TDRCharacterBase.h"
+#include "InteractInterface.h"
 
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 	
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
@@ -69,7 +70,15 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 void ATDRCharacterBase::InteractPressed()
 {
 	TraceForward();
-
+	if (FocusedActor)
+	{
+		IInteractInterface* Interface = Cast<IInteractInterface>(FocusedActor);
+		if (Interface)
+		{
+			Interface->Execute_OnInteract(FocusedActor, this);
+		}
+	}
+	
 }
 
 void ATDRCharacterBase::TraceForward_Implementation()
@@ -86,13 +95,55 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	FCollisionQueryParams TraceParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
+	//DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
 	
 
 	if (bHit)
 	{
-		DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+		//DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+		AActor* Interactable = Hit.GetActor();
+
+
+
+		if (Interactable)
+		{
+			if (Interactable != FocusedActor)
+			{
+				if (FocusedActor) 
+				{
+					IInteractInterface* Interface = Cast<IInteractInterface>(FocusedActor);
+					if (Interface)
+					{
+						Interface->Execute_EndFocus(FocusedActor);
+					}
+				}
+				IInteractInterface* Interface = Cast<IInteractInterface>(Interactable);
+				if (Interface)
+				{
+					Interface->Execute_StartFocus(Interactable);
+				}
+				FocusedActor = Interactable;
+			}
+		}
+		else
+		{
+			if (FocusedActor)
+			{
+				IInteractInterface* Interface = Cast<IInteractInterface>(FocusedActor);
+				if (Interface)
+				{
+					Interface->Execute_EndFocus(FocusedActor);
+				}
+			}
+
+			FocusedActor = nullptr;
+		}
 	}
+}
+
+void ATDRCharacterBase::Tick(float DeltaTime)
+{
+	TraceForward();
 }
 
 // Called to bind functionality to input
