@@ -7,6 +7,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/Controller.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
@@ -63,6 +64,23 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 	AddControllerPitchInput(Value * BaseLookupAtRate * GetWorld()->GetDeltaSeconds());
 }
 
+void ATDRCharacterBase::InteractPressed()
+{
+	FVector Loc;
+	FRotator Rot;
+	FHitResult Hit;
+
+	GetController()->GetPlayerViewPoint(Loc, Rot);
+
+	FVector Start = Loc;
+	FVector End = Start + (Rot.Vector() * 2000);
+
+	FCollisionQueryParams TraceParams;
+	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+
+	DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
+}
+
 // Called to bind functionality to input
 void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -70,6 +88,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATDRCharacterBase::MoveRight);

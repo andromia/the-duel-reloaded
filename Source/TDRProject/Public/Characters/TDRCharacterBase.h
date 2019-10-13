@@ -35,6 +35,7 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
+	void InteractPressed();
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseTurnRate;
