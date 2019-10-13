@@ -26,6 +26,7 @@ ATDRCharacterBase::ATDRCharacterBase()
 
 	BaseTurnRate = 45.0f;
 	BaseLookupAtRate = 45.0f;
+	TraceDistance = 2000.0f;
 }
 
 void ATDRCharacterBase::MoveForward(float Value)
@@ -66,6 +67,12 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 
 void ATDRCharacterBase::InteractPressed()
 {
+	TraceForward();
+
+}
+
+void ATDRCharacterBase::TraceForward_Implementation()
+{
 	FVector Loc;
 	FRotator Rot;
 	FHitResult Hit;
@@ -73,12 +80,18 @@ void ATDRCharacterBase::InteractPressed()
 	GetController()->GetPlayerViewPoint(Loc, Rot);
 
 	FVector Start = Loc;
-	FVector End = Start + (Rot.Vector() * 2000);
+	FVector End = Start + (Rot.Vector() * TraceDistance);
 
 	FCollisionQueryParams TraceParams;
-	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
+	
+
+	if (bHit)
+	{
+		DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+	}
 }
 
 // Called to bind functionality to input

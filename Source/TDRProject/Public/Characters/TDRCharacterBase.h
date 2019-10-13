@@ -43,6 +43,13 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseLookupAtRate;
 
+	UPROPERTY(EditAnywhere, Category = "Interaction")
+	float TraceDistance;
+
+	UFUNCTION(BlueprintNativeEvent)
+	void TraceForward();
+	void TraceForward_Implementation();
+
 public:	
 
 	// Called to bind functionality to input
