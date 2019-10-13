@@ -31,6 +31,12 @@ ATDRCharacterBase::ATDRCharacterBase()
 	TraceDistance = 2000.0f;
 }
 
+void ATDRCharacterBase::BeginPlay()
+{
+	Super::BeginPlay();
+	MeshComp->OnComponentBeginOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapBegin);
+}
+
 void ATDRCharacterBase::MoveForward(float Value)
 {
 	if ((Controller) && (Value != 0.0f))
@@ -98,12 +104,15 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	//DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
 	
 
+	/*
+	* Casting is costly. This will sometimes import all of the class dependancies. Using blueprints for this 
+	* supposedly avoids casting, thus making it more performant. If applicable, use this for character-to-character
+	* interaction, unless character casting is not as costly as more dynamic casing.
+	*/
 	if (bHit)
 	{
 		//DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
 		AActor* Interactable = Hit.GetActor();
-
-
 
 		if (Interactable)
 		{
@@ -138,6 +147,16 @@ void ATDRCharacterBase::TraceForward_Implementation()
 
 			FocusedActor = nullptr;
 		}
+	}
+}
+
+void ATDRCharacterBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
+	bool bFromSweep, const FHitResult& SweepResult)
+{
+	IInteractInterface* Interface = Cast<IInteractInterface>(OtherActor);
+	if (Interface)
+	{
+		Interface->Execute_OnInteract(OtherActor, this);
 	}
 }
 
