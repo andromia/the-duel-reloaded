@@ -101,7 +101,7 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	FCollisionQueryParams TraceParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	//DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
+	DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
 	
 
 	/*
@@ -111,7 +111,7 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	*/
 	if (bHit)
 	{
-		//DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+		DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
 		AActor* Interactable = Hit.GetActor();
 
 		if (Interactable)
