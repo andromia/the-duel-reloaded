@@ -9,6 +9,7 @@
 class USpringArmComponent;
 class UCameraComponent;
 class UStaticMeshComponent;
+class UAnimSequence;
 
 UCLASS()
 class TDRPROJECT_API ATDRCharacterBase : public ACharacter
@@ -36,6 +37,10 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
+	void DodgeForward();
+	void DodgeBackward();
+	void DodgeRight();
+	void DodgeLeft();
 	void InteractPressed();
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -47,28 +52,24 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseDodgeMultiplier;
 
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimSequence* DodgeForwardAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimSequence* DodgeBackwardAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimSequence* DodgeRightAnim;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimSequence* DodgeLeftAnim;
+
 	UPROPERTY(EditAnywhere, Category = "Interaction")
 	float TraceDistance;
 
 	UFUNCTION(BlueprintNativeEvent)
 	void TraceForward();
 	void TraceForward_Implementation();
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void DodgeRight();
-	void DodgeRight_Implementation();
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void DodgeLeft();
-	void DodgeLeft_Implementation();
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void DodgeForward();
-	void DodgeForward_Implementation();
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void DodgeBackward();
-	void DodgeBackward_Implementation();
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,

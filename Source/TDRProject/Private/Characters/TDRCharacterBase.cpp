@@ -75,24 +75,48 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 	AddControllerPitchInput(Value * BaseLookupAtRate * GetWorld()->GetDeltaSeconds());
 }
 
-void ATDRCharacterBase::DodgeRight_Implementation()
+void ATDRCharacterBase::DodgeRight()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Right"));
+
+	if (DodgeRightAnim)
+	{
+		bool bLoop = false;
+		GetMesh()->PlayAnimation(DodgeRightAnim, bLoop);
+	}
 }
 
-void ATDRCharacterBase::DodgeLeft_Implementation()
+void ATDRCharacterBase::DodgeLeft()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Left"));
+
+	if (DodgeLeftAnim)
+	{
+		bool bLoop = false;
+		GetMesh()->PlayAnimation(DodgeLeftAnim, bLoop);
+	}
 }
 
-void ATDRCharacterBase::DodgeForward_Implementation()
+void ATDRCharacterBase::DodgeForward()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Forward"));
+
+	if (DodgeForwardAnim)
+	{
+		bool bLoop = false;
+		GetMesh()->PlayAnimation(DodgeForwardAnim, bLoop);
+	}
 }
 
-void ATDRCharacterBase::DodgeBackward_Implementation()
+void ATDRCharacterBase::DodgeBackward()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Backward"));
+
+	if (DodgeBackwardAnim)
+	{
+		bool bLoop = false;
+		GetMesh()->PlayAnimation(DodgeBackwardAnim, bLoop);
+	}
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -194,10 +218,10 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAction("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::DodgeRight_Implementation);
-	PlayerInputComponent->BindAction("DodgeLeft", IE_DoubleClick, this, &ATDRCharacterBase::DodgeLeft_Implementation);
-	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeForward_Implementation);
-	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeBackward_Implementation);
+	PlayerInputComponent->BindAction("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::DodgeRight);
+	PlayerInputComponent->BindAction("DodgeLeft", IE_DoubleClick, this, &ATDRCharacterBase::DodgeLeft);
+	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeForward);
+	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeBackward);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
