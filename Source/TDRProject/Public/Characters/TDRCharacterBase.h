@@ -27,7 +27,7 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 	UStaticMeshComponent* MeshComp;
-
+	
 	virtual void BeginPlay() override;
 
 protected:
@@ -36,6 +36,10 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
+	void DodgeRight();
+	void DodgeLeft();
+	void DodgeForward();
+	void DodgeBackward();
 	void InteractPressed();
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -43,6 +47,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseLookupAtRate;
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	float BaseDodgeMultiplier;
 
 	UPROPERTY(EditAnywhere, Category = "Interaction")
 	float TraceDistance;

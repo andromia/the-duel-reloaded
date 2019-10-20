@@ -29,6 +29,7 @@ ATDRCharacterBase::ATDRCharacterBase()
 
 	BaseTurnRate = 45.0f;
 	BaseLookupAtRate = 45.0f;
+	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
 }
 
@@ -72,6 +73,26 @@ void ATDRCharacterBase::TurnAtRate(float Value)
 void ATDRCharacterBase::LookUpAtRate(float Value)
 {
 	AddControllerPitchInput(Value * BaseLookupAtRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ATDRCharacterBase::DodgeRight()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Right"));
+}
+
+void ATDRCharacterBase::DodgeLeft()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Left"));
+}
+
+void ATDRCharacterBase::DodgeForward()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Forward"));
+}
+
+void ATDRCharacterBase::DodgeBackward()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Backward"));
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -173,6 +194,10 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::DodgeRight);
+	PlayerInputComponent->BindAction("DodgeLeft", IE_DoubleClick, this, &ATDRCharacterBase::DodgeLeft);
+	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeForward);
+	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeBackward);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
