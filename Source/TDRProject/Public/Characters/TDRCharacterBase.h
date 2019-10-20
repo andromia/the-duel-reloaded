@@ -36,10 +36,6 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
-	void DodgeRight();
-	void DodgeLeft();
-	void DodgeForward();
-	void DodgeBackward();
 	void InteractPressed();
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -57,6 +53,22 @@ protected:
 	UFUNCTION(BlueprintNativeEvent)
 	void TraceForward();
 	void TraceForward_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DodgeRight();
+	void DodgeRight_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DodgeLeft();
+	void DodgeLeft_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DodgeForward();
+	void DodgeForward_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DodgeBackward();
+	void DodgeBackward_Implementation();
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
