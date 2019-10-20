@@ -54,19 +54,19 @@ protected:
 	void TraceForward();
 	void TraceForward_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintImplementableEvent)
 	void DodgeRight();
 	void DodgeRight_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintImplementableEvent)
 	void DodgeLeft();
 	void DodgeLeft_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintImplementableEvent)
 	void DodgeForward();
 	void DodgeForward_Implementation();
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintImplementableEvent)
 	void DodgeBackward();
 	void DodgeBackward_Implementation();
 
