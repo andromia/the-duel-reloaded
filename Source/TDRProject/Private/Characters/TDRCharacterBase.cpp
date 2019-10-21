@@ -48,7 +48,7 @@ void ATDRCharacterBase::MoveForward(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
-
+			
 	}
 }
 
@@ -83,6 +83,8 @@ void ATDRCharacterBase::DodgeRight()
 	{
 		bool bLoop = false;
 		GetMesh()->PlayAnimation(DodgeRightAnim, bLoop);
+		// incomplete utilization of SetAnimationMode; assumed to be canceling animation.
+		//GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 	}
 }
 
