@@ -11,6 +11,9 @@
 #include "..\..\Public\Characters\TDRCharacterBase.h"
 #include "InteractInterface.h"
 
+
+ 
+
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
 {
@@ -78,53 +81,26 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 void ATDRCharacterBase::DodgeRight()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Right"));
-
-	if (DodgeRightAnim)
-	{
-		bool bLoop = false;
-		GetMesh()->PlayAnimation(DodgeRightAnim, bLoop);
-		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
-	}
+	StartAnimationAndEndWithIddle(DodgeRightAnim);
 }
 
 void ATDRCharacterBase::DodgeLeft()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Left"));
+	StartAnimationAndEndWithIddle(DodgeLeftAnim);
 
-	if (DodgeLeftAnim)
-	{
-		bool bLoop = false;
-		GetMesh()->PlayAnimation(DodgeLeftAnim, bLoop);
-		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
-	}
 }
 
 void ATDRCharacterBase::DodgeForward()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Forward"));
-
-	if (DodgeForwardAnim)
-	{
-		bool bLoop = false;
-		GetMesh()->PlayAnimation(DodgeForwardAnim, bLoop);
-		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
-	}
+	StartAnimationAndEndWithIddle(DodgeForwardAnim);
 }
 
 void ATDRCharacterBase::DodgeBackward()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Backward"));
-
-	if (DodgeBackwardAnim)
-	{
-		bool bLoop = false;
-		GetMesh()->PlayAnimation(DodgeBackwardAnim, bLoop);
-		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
-	}
+	StartAnimationAndEndWithIddle(DodgeBackwardAnim);
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -247,4 +223,13 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
 }
 
-
+void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimation)
+{
+	if (StartAnimation)
+	{
+		bool bLoop = false;
+		GetMesh()->PlayAnimation(StartAnimation, bLoop);
+		float AnimationLength = StartAnimation->SequenceLength / StartAnimation->RateScale;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
+	}
+}
