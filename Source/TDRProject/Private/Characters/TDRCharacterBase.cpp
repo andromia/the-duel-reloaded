@@ -11,9 +11,6 @@
 #include "..\..\Public\Characters\TDRCharacterBase.h"
 #include "InteractInterface.h"
 
-
- 
-
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
 {
