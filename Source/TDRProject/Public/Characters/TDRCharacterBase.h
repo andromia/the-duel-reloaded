@@ -32,6 +32,8 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
+	
+	FTimerHandle TimerHandle;
 
 	void MoveForward(float Value);
 	void MoveRight(float Value);
@@ -42,6 +44,7 @@ protected:
 	void DodgeRight();
 	void DodgeLeft();
 	void InteractPressed();
+	void StopCurrentAnimation();
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseTurnRate;

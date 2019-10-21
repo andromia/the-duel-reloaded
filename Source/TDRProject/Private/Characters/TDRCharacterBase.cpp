@@ -83,8 +83,8 @@ void ATDRCharacterBase::DodgeRight()
 	{
 		bool bLoop = false;
 		GetMesh()->PlayAnimation(DodgeRightAnim, bLoop);
-		// incomplete utilization of SetAnimationMode; assumed to be canceling animation.
-		//GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
 }
 
@@ -96,6 +96,8 @@ void ATDRCharacterBase::DodgeLeft()
 	{
 		bool bLoop = false;
 		GetMesh()->PlayAnimation(DodgeLeftAnim, bLoop);
+		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
 }
 
@@ -107,6 +109,8 @@ void ATDRCharacterBase::DodgeForward()
 	{
 		bool bLoop = false;
 		GetMesh()->PlayAnimation(DodgeForwardAnim, bLoop);
+		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
 }
 
@@ -118,6 +122,8 @@ void ATDRCharacterBase::DodgeBackward()
 	{
 		bool bLoop = false;
 		GetMesh()->PlayAnimation(DodgeBackwardAnim, bLoop);
+		float AnimationLength = DodgeRightAnim->SequenceLength / DodgeRightAnim->RateScale;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
 }
 
@@ -133,6 +139,11 @@ void ATDRCharacterBase::InteractPressed()
 		}
 	}
 	
+}
+
+void ATDRCharacterBase::StopCurrentAnimation()
+{
+	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 }
 
 void ATDRCharacterBase::TraceForward_Implementation()
