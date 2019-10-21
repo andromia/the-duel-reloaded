@@ -50,6 +50,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Interaction")
 	float TraceDistance;
 
+	UPROPERTY(EditAnywhere, Category = "Debug")
+	bool Debug;
+
 	UFUNCTION(BlueprintNativeEvent)
 	void TraceForward();
 	void TraceForward_Implementation();
