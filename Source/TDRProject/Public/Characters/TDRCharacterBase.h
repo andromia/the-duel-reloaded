@@ -90,4 +90,6 @@ public:
 
 private:
 	AActor* FocusedActor;
+	void StartAnimationAndEndWithIddle(UAnimSequence*);
+
 };
