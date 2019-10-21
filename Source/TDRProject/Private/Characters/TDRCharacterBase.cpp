@@ -160,7 +160,8 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	FCollisionQueryParams TraceParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
+	if(Debug)
+		DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
 	
 
 	/*

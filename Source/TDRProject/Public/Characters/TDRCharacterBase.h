@@ -45,6 +45,9 @@ protected:
 	void DodgeLeft();
 	void InteractPressed();
 	void StopCurrentAnimation();
+  
+  UPROPERTY(EditAnywhere, Category = "Debug")
+	bool Debug;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	float BaseTurnRate;
