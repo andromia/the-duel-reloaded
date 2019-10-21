@@ -223,6 +223,8 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
 }
 
+#pragma region Helper methods
+
 void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimation)
 {
 	if (StartAnimation)
@@ -233,3 +235,4 @@ void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimat
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
 }
+#pragma endregion methods
