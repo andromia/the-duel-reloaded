@@ -33,11 +33,13 @@ void AInteractableBase::OnInteract_Implementation(AActor* Caller)
 
 void AInteractableBase::StartFocus_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Start Focus"));
+	if(Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Interactable: Start Focus"));
 }
 
 void AInteractableBase::EndFocus_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, TEXT("End Focus"));
+	if (Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Interactable: End Focus"));
 }
 
