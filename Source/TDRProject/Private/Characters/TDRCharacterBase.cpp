@@ -77,26 +77,34 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 
 void ATDRCharacterBase::DodgeRight()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Right"));
+	if (Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Right"));
+
 	StartAnimationAndEndWithIddle(DodgeRightAnim);
 }
 
 void ATDRCharacterBase::DodgeLeft()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Left"));
+	if (Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Left"));
+
 	StartAnimationAndEndWithIddle(DodgeLeftAnim);
 
 }
 
 void ATDRCharacterBase::DodgeForward()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Forward"));
+	if (Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Forward"));
+
 	StartAnimationAndEndWithIddle(DodgeForwardAnim);
 }
 
 void ATDRCharacterBase::DodgeBackward()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TEXT("Dodging Backward"));
+	if (Debug)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Backward"));
+
 	StartAnimationAndEndWithIddle(DodgeBackwardAnim);
 }
 
@@ -144,7 +152,9 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	*/
 	if (bHit)
 	{
-		DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+		if (Debug)
+			DrawDebugBox(GetWorld(), Hit.ImpactPoint, FVector(5, 5, 5), FColor::Emerald, false, 2.0f);
+
 		AActor* Interactable = Hit.GetActor();
 
 		if (Interactable)
