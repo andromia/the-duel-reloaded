@@ -37,7 +37,7 @@ ATDRCharacterBase::ATDRCharacterBase()
 	CanDash = true;
 	DashDistance = 1500.0f;
 	DashCoolDown = 0.0000001f;
-	DashStop = 0.5f;	
+	DashStop = 0.5f;
 }
 
 void ATDRCharacterBase::BeginPlay()
@@ -93,8 +93,8 @@ void ATDRCharacterBase::DodgeRight()
 void ATDRCharacterBase::DodgeLeft()
 {
 	if (Debug)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Left"));	
-	
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Left"));
+
 	LaunchCharacterForDash(left);
 
 }
@@ -229,7 +229,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeForward);
 	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeBackward);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
-	
+
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATDRCharacterBase::MoveRight);
@@ -237,7 +237,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAtRate", this, &ATDRCharacterBase::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);		
+	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
 }
 
 #pragma region Helper methods
@@ -256,17 +256,17 @@ void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimat
 void ATDRCharacterBase::LaunchCharacterForDash(MovementType type)
 {
 	if (CanDash)
-	{		
-		GetCharacterMovement()->BrakingFrictionFactor = 0.f;	
+	{
+		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
 		switch (type)
 		{
-			case left:		StartAnimationAndEndWithIddle(DodgeLeftAnim); LaunchCharacter(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
-			case right:		StartAnimationAndEndWithIddle(DodgeRightAnim); LaunchCharacter(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
-			case forward: 	StartAnimationAndEndWithIddle(DodgeForwardAnim); LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
-			case backward:	StartAnimationAndEndWithIddle(DodgeBackwardAnim); LaunchCharacter(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
-		}		 
+		case left:		StartAnimationAndEndWithIddle(DodgeLeftAnim); LaunchCharacter(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
+		case right:		StartAnimationAndEndWithIddle(DodgeRightAnim); LaunchCharacter(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
+		case forward: 	StartAnimationAndEndWithIddle(DodgeForwardAnim); LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
+		case backward:	StartAnimationAndEndWithIddle(DodgeBackwardAnim); LaunchCharacter(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
+		}
 		CanDash = false;
-		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);				
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 	}
 }
 
@@ -275,8 +275,8 @@ void ATDRCharacterBase::Dash()
 	if (CanDash)
 	{
 		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
-	
-		LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true); 
+
+		LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true);
 		CanDash = false;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 	}
