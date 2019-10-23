@@ -21,18 +21,18 @@ public:
 	ATDRCharacterBase();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	USpringArmComponent* SpringArmComp;
+		USpringArmComponent* SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UCameraComponent* CameraComp;
+		UCameraComponent* CameraComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
-	UStaticMeshComponent* MeshComp;
-	
+		UStaticMeshComponent* MeshComp;
+
 	virtual void BeginPlay() override;
 
 protected:
-	
+
 	FTimerHandle TimerHandle;
 
 	void MoveForward(float Value);
@@ -45,45 +45,70 @@ protected:
 	void DodgeLeft();
 	void InteractPressed();
 	void StopCurrentAnimation();
-  
-  UPROPERTY(EditAnywhere, Category = "Debug")
-	bool Debug;
+	void Dash();
+
+	UPROPERTY(EditAnywhere, Category = "Debug")
+		bool Debug;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
-	float BaseTurnRate;
+		float BaseTurnRate;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
-	float BaseLookupAtRate;
+		float BaseLookupAtRate;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
-	float BaseDodgeMultiplier;
+		float BaseDodgeMultiplier;
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
-	UAnimSequence* DodgeForwardAnim;
+		UAnimSequence* DodgeForwardAnim;
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
-	UAnimSequence* DodgeBackwardAnim;
+		UAnimSequence* DodgeBackwardAnim;
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
-	UAnimSequence* DodgeRightAnim;
+		UAnimSequence* DodgeRightAnim;
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
-	UAnimSequence* DodgeLeftAnim;
+		UAnimSequence* DodgeLeftAnim;
 
 	UPROPERTY(EditAnywhere, Category = "Interaction")
-	float TraceDistance;
+		float TraceDistance;
 
 	UFUNCTION(BlueprintNativeEvent)
-	void TraceForward();
+		void TraceForward();
 	void TraceForward_Implementation();
 
 	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
-		bool bFromSweep, const FHitResult& SweepResult);
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+			bool bFromSweep, const FHitResult& SweepResult);
 
-public:	
+public:
+
+	enum MovementType { forward, backward, left, right };
 
 	virtual void Tick(float DeltaTime) override;
+	void StopDashing();
+	void ResetDash();
+	void LaunchCharacterForDash(MovementType type);
+
+
+#pragma region Dash properties
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashDistance;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashCoolDown;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		bool CanDash;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashStop;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		FTimerHandle UnusedHandle;
+
+#pragma endregion Dash properties
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
