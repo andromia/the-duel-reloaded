@@ -45,8 +45,9 @@ protected:
 	void DodgeLeft();
 	void InteractPressed();
 	void StopCurrentAnimation();
+	void Dash();
   
-  UPROPERTY(EditAnywhere, Category = "Debug")
+    UPROPERTY(EditAnywhere, Category = "Debug")
 	bool Debug;
 
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -81,9 +82,33 @@ protected:
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 		bool bFromSweep, const FHitResult& SweepResult);
 
-public:	
+public:
+
+	enum MovementType { forward, backward, left, right };
 
 	virtual void Tick(float DeltaTime) override;
+	void StopDashing();
+	void ResetDash();
+	void LaunchCharacterForDash(MovementType type);
+
+
+#pragma region Dash properties
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashDistance;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashCoolDown;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		bool CanDash;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		float DashStop;
+
+	UPROPERTY(EditAnywhere, Category = "Dash")
+		FTimerHandle UnusedHandle;
+
+#pragma endregion Dash properties
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

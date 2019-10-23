@@ -10,17 +10,19 @@
 #include "DrawDebugHelpers.h"
 #include "..\..\Public\Characters\TDRCharacterBase.h"
 #include "InteractInterface.h"
+#include "Animation/AnimSequence.h"
+#include "Engine.h"
 
 // Sets default values
 ATDRCharacterBase::ATDRCharacterBase()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
 	SpringArmComp->bUsePawnControlRotation = 1;
-	
+
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 
@@ -31,6 +33,11 @@ ATDRCharacterBase::ATDRCharacterBase()
 	BaseLookupAtRate = 45.0f;
 	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
+
+	CanDash = true;
+	DashDistance = 1500.0f;
+	DashCoolDown = 0.0000001f;
+	DashStop = 0.5f;	
 }
 
 void ATDRCharacterBase::BeginPlay()
@@ -48,7 +55,7 @@ void ATDRCharacterBase::MoveForward(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
-			
+
 	}
 }
 
@@ -80,15 +87,15 @@ void ATDRCharacterBase::DodgeRight()
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Right"));
 
-	StartAnimationAndEndWithIddle(DodgeRightAnim);
+	LaunchCharacterForDash(right);
 }
 
 void ATDRCharacterBase::DodgeLeft()
 {
 	if (Debug)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Left"));
-
-	StartAnimationAndEndWithIddle(DodgeLeftAnim);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Left"));	
+	
+	LaunchCharacterForDash(left);
 
 }
 
@@ -97,7 +104,8 @@ void ATDRCharacterBase::DodgeForward()
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Forward"));
 
-	StartAnimationAndEndWithIddle(DodgeForwardAnim);
+	LaunchCharacterForDash(forward);
+
 }
 
 void ATDRCharacterBase::DodgeBackward()
@@ -105,7 +113,8 @@ void ATDRCharacterBase::DodgeBackward()
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging Backward"));
 
-	StartAnimationAndEndWithIddle(DodgeBackwardAnim);
+	LaunchCharacterForDash(backward);
+
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -119,7 +128,7 @@ void ATDRCharacterBase::InteractPressed()
 			Interface->Execute_OnInteract(FocusedActor, this);
 		}
 	}
-	
+
 }
 
 void ATDRCharacterBase::StopCurrentAnimation()
@@ -141,12 +150,12 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	FCollisionQueryParams TraceParams;
 	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	if(Debug)
+	if (Debug)
 		DrawDebugLine(GetWorld(), Start, End, FColor::Orange, false, 2.0f);
-	
+
 
 	/*
-	* Casting is costly. This will sometimes import all of the class dependancies. Using blueprints for this 
+	* Casting is costly. This will sometimes import all of the class dependancies. Using blueprints for this
 	* supposedly avoids casting, thus making it more performant. If applicable, use this for character-to-character
 	* interaction, unless character casting is not as costly as more dynamic casing.
 	*/
@@ -161,7 +170,7 @@ void ATDRCharacterBase::TraceForward_Implementation()
 		{
 			if (Interactable != FocusedActor)
 			{
-				if (FocusedActor) 
+				if (FocusedActor)
 				{
 					IInteractInterface* Interface = Cast<IInteractInterface>(FocusedActor);
 					if (Interface)
@@ -193,7 +202,9 @@ void ATDRCharacterBase::TraceForward_Implementation()
 	}
 }
 
-void ATDRCharacterBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
+
+
+void ATDRCharacterBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
 {
 	IInteractInterface* Interface = Cast<IInteractInterface>(OtherActor);
@@ -211,8 +222,6 @@ void ATDRCharacterBase::Tick(float DeltaTime)
 // Called to bind functionality to input
 void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::DodgeRight);
@@ -220,6 +229,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeForward);
 	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::DodgeBackward);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
+	
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATDRCharacterBase::MoveRight);
@@ -227,7 +237,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAtRate", this, &ATDRCharacterBase::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
+	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);		
 }
 
 #pragma region Helper methods
@@ -241,5 +251,46 @@ void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimat
 		float AnimationLength = StartAnimation->SequenceLength / StartAnimation->RateScale;
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
 	}
+}
+
+void ATDRCharacterBase::LaunchCharacterForDash(MovementType type)
+{
+	if (CanDash)
+	{		
+		GetCharacterMovement()->BrakingFrictionFactor = 0.f;	
+		switch (type)
+		{
+			case left:		StartAnimationAndEndWithIddle(DodgeLeftAnim); LaunchCharacter(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
+			case right:		StartAnimationAndEndWithIddle(DodgeRightAnim); LaunchCharacter(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
+			case forward: 	StartAnimationAndEndWithIddle(DodgeForwardAnim); LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true); break;
+			case backward:	StartAnimationAndEndWithIddle(DodgeBackwardAnim); LaunchCharacter(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal() * DashDistance, true, true); break;
+		}		 
+		CanDash = false;
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);				
+	}
+}
+
+void ATDRCharacterBase::Dash()
+{
+	if (CanDash)
+	{
+		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
+	
+		LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true); 
+		CanDash = false;
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
+	}
+
+}
+void ATDRCharacterBase::StopDashing()
+{
+	GetCharacterMovement()->StopMovementImmediately();
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::ResetDash, DashCoolDown, false);
+	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+}
+
+void ATDRCharacterBase::ResetDash()
+{
+	CanDash = true;
 }
 #pragma endregion methods
