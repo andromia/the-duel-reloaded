@@ -39,10 +39,7 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
-	void DodgeForward();
-	void DodgeBackward();
-	void DodgeRight();
-	void DodgeLeft();
+
 	void InteractPressed();
 	void StopCurrentAnimation();
 	void Dash();
@@ -71,6 +68,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Animation")
 		UAnimSequence* DodgeLeftAnim;
 
+	UPROPERTY(EditAnywhere, Category = "Animation")
+		UAnimSequence* WallWalkingAnim;
+
 	UPROPERTY(EditAnywhere, Category = "Interaction")
 		float TraceDistance;
 
@@ -82,10 +82,14 @@ protected:
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 			bool bFromSweep, const FHitResult& SweepResult);
 
+	UFUNCTION()
+		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+
 public:
 
 	enum MovementType { forward, backward, left, right };
-
+	void Dodge(MovementType direction);
 	virtual void Tick(float DeltaTime) override;
 	void StopDashing();
 	void ResetDash();
@@ -108,6 +112,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Dash")
 		FTimerHandle UnusedHandle;
 
+	UPROPERTY(EditAnywhere, Category = "WalkUp")
+		float WalkUpDistance;
 #pragma endregion Dash properties
 
 	// Called to bind functionality to input
@@ -116,5 +122,9 @@ public:
 private:
 	AActor* FocusedActor;
 	void StartAnimationAndEndWithIddle(UAnimSequence*);
-
+	DECLARE_DELEGATE_OneParam(DirectionDelagate, MovementType);
+	bool WallTouching;
+	void Jump();
+	void TurnBack();
+	bool WallWalking;
 };
