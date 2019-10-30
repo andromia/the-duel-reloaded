@@ -127,9 +127,4 @@ private:
 	void Jump();
 	void TurnBack();
 	bool WallWalking;
-	float x;
-	float y;
-	float z;
-	FVector SavePoint;
-
 };

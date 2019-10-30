@@ -44,10 +44,6 @@ ATDRCharacterBase::ATDRCharacterBase()
 void ATDRCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	SavePoint = this->GetActorLocation();
-	x = SavePoint.X;
-	y = SavePoint.Y;
-	z = SavePoint.Z;
 	USkeletalMeshComponent* Comp = GetMesh();
 	Comp->OnComponentBeginOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapBegin);
 	Comp->OnComponentEndOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapEnd);
@@ -211,22 +207,23 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
 	TraceForward();
+	if (WallWalking)
+	{
+		LaunchCharacter(FVector(0, 0, RootComponent->GetUpVector().Z).GetSafeNormal() * WalkUpDistance, true, true);
+	}
 }
 
 void ATDRCharacterBase::Jump()
 {
 	if (WallTouching)
 	{
+		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
 		WallWalking = true;
 		FRotator NewRotation = FRotator(85, 0, 0);
 		FQuat QuatRotation = FQuat(NewRotation);
 		RootComponent->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-		GetMesh()->PlayAnimation(WallWalkingAnim, true);
-
-		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
-		LaunchCharacter(FVector(0, 0, RootComponent->GetUpVector().Z).GetSafeNormal() * WalkUpDistance, true, true);
-
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 3.f, false);
+		GetMesh()->PlayAnimation(WallWalkingAnim, true);			
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);
 	}
 	else
 	{
@@ -236,12 +233,13 @@ void ATDRCharacterBase::Jump()
 
 void ATDRCharacterBase::TurnBack()
 {
-	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
-	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+	WallWalking = false;
+	GetCharacterMovement()->BrakingFrictionFactor = 2.f;	
 	FRotator NewRotation = FRotator(-85, 0, 0);
 	FQuat QuatRotation = FQuat(NewRotation);
 	RootComponent->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-	WallWalking = false;
+	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+	
 }
 
 // Called to bind functionality to input
