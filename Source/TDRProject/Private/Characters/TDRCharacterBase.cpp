@@ -38,7 +38,7 @@ ATDRCharacterBase::ATDRCharacterBase()
 	DashCoolDown = 0.0000001f;
 	DashStop = 0.5f;
 
-	WalkUpDistance = 1000.f;
+	WalkUpDistance = 300.f;
 }
 
 void ATDRCharacterBase::BeginPlay()
