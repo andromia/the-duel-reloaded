@@ -26,6 +26,11 @@ ATDRCharacterBase::ATDRCharacterBase()
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 
+	LeftHandMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Left"));
+	LeftHandMesh->SetupAttachment(RootComponent);
+	RightHandMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
+	RightHandMesh->SetupAttachment(RootComponent);
+
 
 
 	BaseTurnRate = 45.0f;
@@ -38,7 +43,7 @@ ATDRCharacterBase::ATDRCharacterBase()
 	DashCoolDown = 0.0000001f;
 	DashStop = 0.5f;
 
-	WalkUpDistance = 300.f;
+	WalkUpDistance = 1000.f;
 }
 
 void ATDRCharacterBase::BeginPlay()
@@ -48,6 +53,7 @@ void ATDRCharacterBase::BeginPlay()
 	Comp->OnComponentBeginOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapBegin);
 	Comp->OnComponentEndOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapEnd);
 }
+
 
 void ATDRCharacterBase::MoveForward(float Value)
 {
@@ -184,9 +190,24 @@ void ATDRCharacterBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 	FString TheString = OtherActor->GetName();
 	if (OtherActor->GetName().Contains("Wall"))
 	{
-		WallTouching = true;
-	}
+		float leftHAndDistance = GetMesh()->GetBoneLocation("hand_l").GetAbs().X - OtherActor->GetActorLocation().GetAbs().X;
+		float righHAndDistance = GetMesh()->GetBoneLocation("hand_r").GetAbs().X - OtherActor->GetActorLocation().GetAbs().X;
+		aWallTouched = OtherActor;
 
+		if (abs(leftHAndDistance) > abs(righHAndDistance))
+		{
+			bRightArmTouchingWall = false;
+			bLeftArmTouchingWall = true;
+
+		}
+		else
+		{
+			bRightArmTouchingWall = true;
+			bLeftArmTouchingWall = false;
+		}
+
+		bWallTouching = true;
+	}
 
 	IInteractInterface* Interface = Cast<IInteractInterface>(OtherActor);
 	if (Interface)
@@ -199,7 +220,8 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 {
 	if (OtherActor->GetName().Contains("Wall"))
 	{
-		WallTouching = false;
+		bWallTouching = false;
+		aWallTouched = NULL;
 	}
 
 }
@@ -207,22 +229,59 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
 	TraceForward();
-	if (WallWalking)
+
+	//When walking sideways, we want to keep the actor on the z axis location
+	if (bWalkingSideWays && bWallWalking)
 	{
-		LaunchCharacter(FVector(0, 0, RootComponent->GetUpVector().Z).GetSafeNormal() * WalkUpDistance, true, true);
+		FVector location = GetActorLocation();
+		location.Z = zValue;
+		SetActorLocation(location);
 	}
 }
 
 void ATDRCharacterBase::Jump()
 {
-	if (WallTouching)
+	if (bWallTouching && aWallTouched != NULL)
 	{
+		//angle to detect if we are going to walk up or walk sideways
+		float angle = FMath::Acos(FVector::DotProduct(aWallTouched->GetActorRightVector(), RootComponent->GetForwardVector()));
+
+		//Since we are about to be launched somewhere, setting friction to 0 so that we dont slowed down by anything, as the speed shold be constant
 		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
-		WallWalking = true;
-		FRotator NewRotation = FRotator(85, 0, 0);
-		FQuat QuatRotation = FQuat(NewRotation);
-		RootComponent->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-		GetMesh()->PlayAnimation(WallWalkingAnim, true);			
+		bWallWalking = true;
+
+
+		//Character has to be rotateed on axis based  on which way it will wall walk
+		if (angle > 2.7 && angle < 3.3)
+		{
+			fRotationXForWallWalk = 85;
+			LaunchCharacter(FVector(0, 0, CameraComp->GetUpVector().Z).GetSafeNormal() * WalkUpDistance, true, true);
+		}
+		else
+		{
+			bWalkingSideWays = true;
+
+			//When we walk sideways, we want to be able to move up the wall on z the z axis first istead of touching the wall, this takes care of that as well as the code in the tick method
+			FVector location = GetActorLocation();
+			location.Z += 300;
+			zValue = location.Z;
+			SetActorLocation(location);
+
+			if (bLeftArmTouchingWall)
+			{
+				fRotationZforWallWalk = -85;
+				LaunchCharacter(FVector(0, -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
+			}
+			else
+			{
+				fRotationZforWallWalk = 85;
+				LaunchCharacter(FVector(0, (CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
+			}
+
+		}
+		FQuat QuatRotation = FQuat(FRotator(fRotationXForWallWalk, 0, fRotationZforWallWalk));
+		RootComponent->AddLocalRotation(QuatRotation, true, 0, ETeleportType::None);
+		GetMesh()->PlayAnimation(WallWalkingAnim, true);
 		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);
 	}
 	else
@@ -233,13 +292,16 @@ void ATDRCharacterBase::Jump()
 
 void ATDRCharacterBase::TurnBack()
 {
-	WallWalking = false;
-	GetCharacterMovement()->BrakingFrictionFactor = 2.f;	
-	FRotator NewRotation = FRotator(-85, 0, 0);
-	FQuat QuatRotation = FQuat(NewRotation);
+	bWallWalking = false;
+	bWalkingSideWays = false;
+
+	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+	FQuat QuatRotation = FQuat(FRotator(-fRotationXForWallWalk, 0, -fRotationZforWallWalk));
 	RootComponent->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
-	
+
+	fRotationXForWallWalk = 0;
+	fRotationZforWallWalk = 0;
 }
 
 // Called to bind functionality to input
