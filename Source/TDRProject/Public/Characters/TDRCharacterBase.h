@@ -95,6 +95,10 @@ public:
 	void ResetDash();
 	void LaunchCharacterForDash(MovementType type);
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+		UStaticMeshComponent * LeftHandMesh;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+		UStaticMeshComponent * RightHandMesh;
 
 #pragma region Dash properties
 	UPROPERTY(EditAnywhere, Category = "Dash")
@@ -123,8 +127,17 @@ private:
 	AActor* FocusedActor;
 	void StartAnimationAndEndWithIddle(UAnimSequence*);
 	DECLARE_DELEGATE_OneParam(DirectionDelagate, MovementType);
-	bool WallTouching;
 	void Jump();
 	void TurnBack();
-	bool WallWalking;
+
+	bool bWallTouching;
+	bool bWallWalking;
+	bool bLeftArmTouchingWall;
+	bool bRightArmTouchingWall;
+	AActor* aWallTouched;
+	float fRotationXForWallWalk;
+	float fRotationZforWallWalk;
+	int Counter;
+	bool bWalkingSideWays;
+	float zValue;
 };
