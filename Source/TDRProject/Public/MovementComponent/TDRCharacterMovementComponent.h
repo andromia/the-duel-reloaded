@@ -24,9 +24,6 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 		virtual void SetMoveFor(ACharacter* Character, float InDeltaTime, FVector const& NewAccel, class FNetworkPredictionData_Client_Character & ClientData) override;
 		virtual void PrepMoveFor(class ACharacter* Character) override;
 
-		//WalkSpeedUpdate
-		uint8 bSavedRequestMaxWalkSpeedChange : 1;
-
 		//Dodge
 		FVector SavedMoveDirection;
 		uint8 bSavedWAntsToDodge : 1;
@@ -45,17 +42,6 @@ public:
 	virtual class FNetworkPredictionData_Client* GetPredictionData_Client() const override;
 	void OnMovementUpdated(float DeltaTime, const FVector& OldLocation, const FVector& OldVelocity);
 
-	//Set Max walk speed
-	uint8 bRequestMaxWalkSpeedChange : 1;
-
-	UFUNCTION(Unreliable, Server, WithValidation)
-		void Server_SetMaxWalkSpeed(const float NewMaxWalkSpeed);
-
-	float MyNewMaxWalkSpeed;
-
-	//Set max walk speed on the client
-	UFUNCTION(BluePrintCallable, Category = "Max Walk Speed")
-		void SetMaxWalkSpeed(float NewMaxWalkSpeed);
 
 	//Dodge
 	UPROPERTY(EditAnywhere, Category = "Dodge")

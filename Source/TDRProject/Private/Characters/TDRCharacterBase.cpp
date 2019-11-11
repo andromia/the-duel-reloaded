@@ -41,11 +41,8 @@ ATDRCharacterBase::ATDRCharacterBase(const FObjectInitializer& ObjectInitializer
 	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
 
-	CanDash = true;
-	DashDistance = 1500.0f;
-	DashCoolDown = 0.0000001f;
+	CanDash = true;		
 	DashStop = 0.5f;
-
 	WalkUpDistance = 1000.f;
 }
 
@@ -101,7 +98,6 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 
 void ATDRCharacterBase::Dodge(MovementType direction)
 {
-
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
 
@@ -338,8 +334,6 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, forward);
 	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, backward);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
-
-
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATDRCharacterBase::MoveRight);
 
@@ -350,55 +344,9 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 }
 
 #pragma region Helper methods
-
-void ATDRCharacterBase::StartAnimationAndEndWithIddle(UAnimSequence* StartAnimation)
-{
-	if (StartAnimation)
-	{
-		bool bLoop = false;
-		GetMesh()->PlayAnimation(StartAnimation, bLoop);
-		float AnimationLength = StartAnimation->SequenceLength / StartAnimation->RateScale;
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::StopCurrentAnimation, AnimationLength, false);
-	}
-}
-
-void ATDRCharacterBase::LaunchCharacterForDash(MovementType type)
-{
-	if (CanDash)
-	{
-		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
-		switch (type)
-		{
-		case left:
-			StartAnimationAndEndWithIddle(DodgeLeftAnim);
-			LaunchCharacter(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * DashDistance, true, true);
-			break;
-		case right:
-			StartAnimationAndEndWithIddle(DodgeRightAnim);
-			LaunchCharacter(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal() * DashDistance, true, true);
-			break;
-		case forward:
-			StartAnimationAndEndWithIddle(DodgeForwardAnim);
-			LaunchCharacter(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal() * DashDistance, true, true);
-			break;
-		case backward:
-			StartAnimationAndEndWithIddle(DodgeBackwardAnim);
-			LaunchCharacter(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal() * DashDistance, true, true);
-			break;
-		}
-
-		CanDash = false;
-		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
-	}
-}
-
 void ATDRCharacterBase::StopDashing()
 {
 	Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->StopDodge();
-}
-
-void ATDRCharacterBase::ResetDash()
-{
 	CanDash = true;
 }
 #pragma endregion methods

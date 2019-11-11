@@ -99,8 +99,6 @@ public:
 	void Dodge(MovementType direction);
 	virtual void Tick(float DeltaTime) override;
 	void StopDashing();
-	void ResetDash();
-	void LaunchCharacterForDash(MovementType type);
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 		UStaticMeshComponent * LeftHandMesh;
@@ -108,11 +106,6 @@ public:
 		UStaticMeshComponent * RightHandMesh;
 
 #pragma region Dash properties
-	UPROPERTY(EditAnywhere, Category = "Dash")
-		float DashDistance;
-
-	UPROPERTY(EditAnywhere, Category = "Dash")
-		float DashCoolDown;
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
 		bool CanDash;

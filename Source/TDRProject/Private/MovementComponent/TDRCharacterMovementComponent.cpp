@@ -16,14 +16,6 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 	{
 		return;
 	}
-
-	//SetMaxWalkSpeed
-	if (bRequestMaxWalkSpeedChange)
-	{
-		bRequestMaxWalkSpeedChange = false;
-		MaxWalkSpeed = MyNewMaxWalkSpeed;
-	}
-
 	//Dash
 
 	if (bWantsToDodge)
@@ -37,8 +29,7 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 
 void UTDRCharacterMovementComponent::UpdateFromCompressedFlags(uint8 Flags) // Client side
 {
-	Super::UpdateFromCompressedFlags(Flags);
-	bRequestMaxWalkSpeedChange = (Flags&FSavedMove_Character::FLAG_Custom_0) != 0;
+	Super::UpdateFromCompressedFlags(Flags);	
 	bWantsToDodge = (Flags&FSavedMove_Character::FLAG_Custom_1) != 0;
 }
 
@@ -61,8 +52,7 @@ class FNetworkPredictionData_Client* UTDRCharacterMovementComponent::GetPredicti
 void UTDRCharacterMovementComponent::FSavedMove_My::Clear()
 {
 	Super::Clear();
-
-	bSavedRequestMaxWalkSpeedChange = false;
+	
 	bSavedWAntsToDodge = false;
 	SavedMoveDirection = FVector::ZeroVector;
 }
@@ -70,11 +60,6 @@ void UTDRCharacterMovementComponent::FSavedMove_My::Clear()
 uint8 UTDRCharacterMovementComponent::FSavedMove_My::GetCompressedFlags() const
 {
 	uint8 Result = Super::GetCompressedFlags();
-
-	if (bSavedRequestMaxWalkSpeedChange)
-	{
-		Result |= FLAG_Custom_0;
-	}
 
 	if (bSavedWAntsToDodge)
 	{
@@ -86,10 +71,6 @@ uint8 UTDRCharacterMovementComponent::FSavedMove_My::GetCompressedFlags() const
 
 bool UTDRCharacterMovementComponent::FSavedMove_My::CanCombineWith(const FSavedMovePtr& NewMove, ACharacter* Character, float MaxDelta) const
 {
-	if (bSavedRequestMaxWalkSpeedChange != ((FSavedMove_My*)&NewMove)->bSavedRequestMaxWalkSpeedChange)
-	{
-		return false;
-	}
 
 	if (bSavedWAntsToDodge != ((FSavedMove_My*)&NewMove)->bSavedWAntsToDodge)
 	{
@@ -110,8 +91,7 @@ void UTDRCharacterMovementComponent::FSavedMove_My::SetMoveFor(ACharacter* Chara
 	UTDRCharacterMovementComponent* CharacterMovement = Cast<UTDRCharacterMovementComponent>(Character->GetCharacterMovement());
 
 	if (CharacterMovement)
-	{
-		bSavedRequestMaxWalkSpeedChange = CharacterMovement->bRequestMaxWalkSpeedChange;
+	{		
 		bSavedWAntsToDodge = CharacterMovement->bWantsToDodge;
 		SavedMoveDirection = CharacterMovement->MoveDirection;
 	}
@@ -136,31 +116,6 @@ UTDRCharacterMovementComponent::FNetworkPredictionData_Client_My::FNetworkPredic
 FSavedMovePtr UTDRCharacterMovementComponent::FNetworkPredictionData_Client_My::AllocateNewMove()
 {
 	return FSavedMovePtr(new FSavedMove_My());
-}
-
-//Set max walk speed to trasfer the current walk speed to the server
-bool UTDRCharacterMovementComponent::Server_SetMaxWalkSpeed_Validate(const float NewMaxWalkSpeed)
-{
-	if (NewMaxWalkSpeed < 0.f || NewMaxWalkSpeed > 2000.f)
-		return false;
-	else
-		return true;
-}
-
-void UTDRCharacterMovementComponent::Server_SetMaxWalkSpeed_Implementation(const float NewMaxWalkSpeed)
-{
-	MyNewMaxWalkSpeed = NewMaxWalkSpeed;
-}
-
-void UTDRCharacterMovementComponent::SetMaxWalkSpeed(float NewMaxWalkSpeed)
-{
-	if (PawnOwner->IsLocallyControlled())
-	{
-		MyNewMaxWalkSpeed = NewMaxWalkSpeed;
-		Server_SetMaxWalkSpeed(NewMaxWalkSpeed);
-	}
-
-	bRequestMaxWalkSpeedChange = true;
 }
 
 bool UTDRCharacterMovementComponent::Server_MoveDirection_Validate(const FVector& MoveDir)
