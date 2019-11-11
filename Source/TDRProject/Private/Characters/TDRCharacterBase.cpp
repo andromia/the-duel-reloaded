@@ -11,10 +11,13 @@
 #include "..\..\Public\Characters\TDRCharacterBase.h"
 #include "InteractInterface.h"
 #include "Animation/AnimSequence.h"
+#include "TDRCharacterMovementComponent.h"
 #include "Engine.h"
 
+
 // Sets default values
-ATDRCharacterBase::ATDRCharacterBase()
+ATDRCharacterBase::ATDRCharacterBase(const FObjectInitializer& ObjectInitializer)
+	:Super(ObjectInitializer.SetDefaultSubobjectClass<UTDRCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -54,6 +57,11 @@ void ATDRCharacterBase::BeginPlay()
 	Comp->OnComponentEndOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapEnd);
 }
 
+void ATDRCharacterBase::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	MyCharacterMovementComponent = Cast<UTDRCharacterMovementComponent>(Super::GetMovementComponent());
+}
 
 void ATDRCharacterBase::MoveForward(float Value)
 {
@@ -93,11 +101,27 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 
 void ATDRCharacterBase::Dodge(MovementType direction)
 {
+
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
 
-	LaunchCharacterForDash(direction);
+	switch (direction)
+	{
+	case left:
+		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());		
+		break;
+	case right:
+		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());		
+		break;
+	case forward:
+		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());		
+		break;
+	case backward:
+		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());		
+		break;
+	}	
 
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -228,7 +252,7 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
-	TraceForward();
+	//TraceForward();
 
 	//When walking sideways, we want to keep the actor on the z axis location
 	if (bWalkingSideWays && bWallWalking)
@@ -370,9 +394,7 @@ void ATDRCharacterBase::LaunchCharacterForDash(MovementType type)
 
 void ATDRCharacterBase::StopDashing()
 {
-	GetCharacterMovement()->StopMovementImmediately();
-	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::ResetDash, DashCoolDown, false);
-	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
+	Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->StopDodge();
 }
 
 void ATDRCharacterBase::ResetDash()

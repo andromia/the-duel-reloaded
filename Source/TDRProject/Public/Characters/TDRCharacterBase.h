@@ -20,6 +20,13 @@ public:
 	// Sets default values for this character's properties
 	ATDRCharacterBase();
 
+	ATDRCharacterBase(const FObjectInitializer& ObjectInitializer);
+
+	UFUNCTION(BluePrintCallable, Category = "Movement")
+		FORCEINLINE class UTDRCharacterMovementComponent* GetMovementComponet() const { return MyCharacterMovementComponent; }
+
+	virtual void PostInitializeComponents() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 		USpringArmComponent* SpringArmComp;
 
@@ -139,5 +146,6 @@ private:
 	float fRotationZforWallWalk;
 	int Counter;
 	bool bWalkingSideWays;
-	float zValue;
+	float zValue;	
+	UTDRCharacterMovementComponent* MyCharacterMovementComponent;
 };
