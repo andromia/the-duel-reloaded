@@ -108,7 +108,7 @@ public:
 #pragma region Dash properties
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
-		bool CanDash;
+		bool Dashing;
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
 		float DashStop;

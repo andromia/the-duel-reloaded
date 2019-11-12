@@ -34,14 +34,14 @@ ATDRCharacterBase::ATDRCharacterBase(const FObjectInitializer& ObjectInitializer
 	RightHandMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
 	RightHandMesh->SetupAttachment(RootComponent);
 
-
-
 	BaseTurnRate = 45.0f;
 	BaseLookupAtRate = 45.0f;
 	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
 
-	CanDash = true;		
+	MyCharacterMovementComponent = Cast<UTDRCharacterMovementComponent>(GetMovementComponent());
+
+	Dashing = false;
 	DashStop = 0.5f;
 	WalkUpDistance = 1000.f;
 }
@@ -100,23 +100,27 @@ void ATDRCharacterBase::Dodge(MovementType direction)
 {
 	if (Debug)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
+	
+	if (Dashing)
+		return;
 
+	Dashing = true;
 	switch (direction)
 	{
 	case left:
-		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());		
+		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());
 		break;
 	case right:
-		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());		
+		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());
 		break;
 	case forward:
-		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());		
+		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());
 		break;
 	case backward:
-		Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());		
+		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());
 		break;
 	}	
-
+	
 	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 }
 
@@ -347,6 +351,6 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 void ATDRCharacterBase::StopDashing()
 {
 	Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->StopDodge();
-	CanDash = true;
+	Dashing = false;
 }
 #pragma endregion methods
