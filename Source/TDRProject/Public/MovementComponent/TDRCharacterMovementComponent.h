@@ -27,6 +27,8 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 		//Dodge
 		FVector SavedMoveDirection;
 		uint8 bSavedWAntsToDodge : 1;
+		uint8 bSavedWalkUp: 1;
+		uint8 bReturnToNormal : 1;
 	};
 
 	class FNetworkPredictionData_Client_My : public FNetworkPredictionData_Client_Character
@@ -53,9 +55,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Dodge")
 		void Dodge(const FVector& MoveDir);
 
-	void StopDodge();
+	void Walkup();
 			
 
 	FVector MoveDirection;
-	uint8 bWantsToDodge : 1;	
+	uint8 bWantsToDodge : 1;
+	uint8 bWalkup : 1;
+	uint8 bReturnToNormal : 1;
+	void ReturnToNormal();
 };

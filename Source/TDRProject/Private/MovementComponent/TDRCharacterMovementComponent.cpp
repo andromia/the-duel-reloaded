@@ -2,6 +2,7 @@
 
 #include "..\..\Public\MovementComponent\TDRCharacterMovementComponent.h"
 #include "..\..\Public\Characters\TDRCharacterBase.h"
+#include "TimerManager.h"
 
 UTDRCharacterMovementComponent::UTDRCharacterMovementComponent(const class FObjectInitializer& ObjectInitialiazer) : Super(ObjectInitialiazer)
 {
@@ -9,28 +10,57 @@ UTDRCharacterMovementComponent::UTDRCharacterMovementComponent(const class FObje
 }
 
 void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FVector& OldLocation, const FVector& OldVelocity)
-{
+{	
 	Super::OnMovementUpdated(DeltaTime, OldLocation, OldVelocity);
-
 	if (!CharacterOwner)
 	{
 		return;
 	}
 	//Dash
+		
+	if (bWalkup)
+	{					
+		if (PawnOwner->IsLocallyControlled())
+		{
+			Server_MoveDirection(PawnOwner->GetActorUpVector());
+		}
+		FVector DodgeVelocity = MoveDirection * DodgeStrength;
+		Launch(DodgeVelocity);
+		FQuat QuatRotation = FQuat(FRotator(90, 0, 0));
+		PawnOwner->AddActorLocalRotation(QuatRotation);
+		bWalkup = false;
+		FTimerHandle test;
+		PawnOwner->GetWorldTimerManager().SetTimer(test, this, &UTDRCharacterMovementComponent::ReturnToNormal, 2.f, false);
+	}
 
 	if (bWantsToDodge)
 	{
+		if (PawnOwner->IsLocallyControlled())
+		{
+			Server_MoveDirection(FVector(0,0,PawnOwner->GetLastMovementInputVector().Z));
+		}
 		MoveDirection.Normalize();
-		FVector DodgeVelocity = MoveDirection * DodgeStrength;
+		FVector DodgeVelocity;
+		DodgeVelocity = MoveDirection * DodgeStrength;
 		DodgeVelocity.Z = 0.0f;
 		Launch(DodgeVelocity);
+		bWantsToDodge = false;
+		
+	}
+
+	if (bReturnToNormal)
+	{
+		FQuat QuatRotation = FQuat(FRotator(-90, 0, 0));
+		PawnOwner->AddActorLocalRotation(QuatRotation);
+		bReturnToNormal = false;
 	}
 }
 
 void UTDRCharacterMovementComponent::UpdateFromCompressedFlags(uint8 Flags) // Client side
 {
-	Super::UpdateFromCompressedFlags(Flags);	
+	Super::UpdateFromCompressedFlags(Flags);
 	bWantsToDodge = (Flags&FSavedMove_Character::FLAG_Custom_1) != 0;
+	bWalkup = (Flags&FSavedMove_Character::FLAG_Custom_2) != 0;
 }
 
 class FNetworkPredictionData_Client* UTDRCharacterMovementComponent::GetPredictionData_Client() const
@@ -51,10 +81,10 @@ class FNetworkPredictionData_Client* UTDRCharacterMovementComponent::GetPredicti
 
 void UTDRCharacterMovementComponent::FSavedMove_My::Clear()
 {
-	Super::Clear();
-	
+	Super::Clear();	
 	bSavedWAntsToDodge = false;
 	SavedMoveDirection = FVector::ZeroVector;
+	bSavedWalkUp = false;
 }
 
 uint8 UTDRCharacterMovementComponent::FSavedMove_My::GetCompressedFlags() const
@@ -64,6 +94,10 @@ uint8 UTDRCharacterMovementComponent::FSavedMove_My::GetCompressedFlags() const
 	if (bSavedWAntsToDodge)
 	{
 		Result |= FLAG_Custom_1;
+	}
+	if (bSavedWalkUp)
+	{
+		Result |= FLAG_Custom_2;
 	}
 
 	return Result;
@@ -82,6 +116,11 @@ bool UTDRCharacterMovementComponent::FSavedMove_My::CanCombineWith(const FSavedM
 		return false;
 	}
 
+	if (bSavedWalkUp != ((FSavedMove_My*)&NewMove)->bSavedWalkUp)
+	{
+		return false;
+	}
+
 	return Super::CanCombineWith(NewMove, Character, MaxDelta);
 }
 
@@ -91,9 +130,10 @@ void UTDRCharacterMovementComponent::FSavedMove_My::SetMoveFor(ACharacter* Chara
 	UTDRCharacterMovementComponent* CharacterMovement = Cast<UTDRCharacterMovementComponent>(Character->GetCharacterMovement());
 
 	if (CharacterMovement)
-	{		
+	{
 		bSavedWAntsToDodge = CharacterMovement->bWantsToDodge;
 		SavedMoveDirection = CharacterMovement->MoveDirection;
+		bSavedWalkUp = CharacterMovement->bWalkup;		
 	}
 }
 
@@ -103,7 +143,7 @@ void UTDRCharacterMovementComponent::FSavedMove_My::PrepMoveFor(class ACharacter
 	UTDRCharacterMovementComponent* CharacterMovement = Cast<UTDRCharacterMovementComponent>(Character->GetCharacterMovement());
 	if (CharacterMovement)
 	{
-		CharacterMovement->MoveDirection = SavedMoveDirection;
+		CharacterMovement->MoveDirection = SavedMoveDirection;		
 	}
 }
 
@@ -131,14 +171,22 @@ void UTDRCharacterMovementComponent::Server_MoveDirection_Implementation(const F
 //Trigger dodge
 void UTDRCharacterMovementComponent::Dodge(const FVector& MoveDir)
 {
-	if (PawnOwner->IsLocallyControlled())
-	{		
-		Server_MoveDirection(MoveDir);
-	}	
+
+	
 	bWantsToDodge = true;
 }
 
-void UTDRCharacterMovementComponent::StopDodge()
+void UTDRCharacterMovementComponent::Walkup()
 {
-	bWantsToDodge = false;
+	
+
+	bWalkup = true;
 }
+
+void UTDRCharacterMovementComponent::ReturnToNormal()
+{
+
+
+	bReturnToNormal = true;
+}
+

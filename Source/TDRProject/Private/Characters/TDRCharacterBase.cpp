@@ -265,6 +265,8 @@ void ATDRCharacterBase::Tick(float DeltaTime)
 
 void ATDRCharacterBase::Jump()
 {
+	//MyCharacterMovementComponent->Walkup();
+
 	if (bWallTouching && aWallTouched != NULL)
 	{
 		//angle to detect if we are going to walk up or walk sideways
@@ -349,8 +351,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 #pragma region Helper methods
 void ATDRCharacterBase::StopDashing()
-{
-	Cast<UTDRCharacterMovementComponent>(GetMovementComponent())->StopDodge();
+{	
 	Dashing = false;
 }
 #pragma endregion methods
