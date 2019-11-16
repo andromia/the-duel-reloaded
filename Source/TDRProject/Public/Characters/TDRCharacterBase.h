@@ -100,6 +100,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void StopDashing();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallWalking)
+		bool bWallWalking;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 		UStaticMeshComponent * LeftHandMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
@@ -131,8 +133,7 @@ private:
 	void TurnBack();
 
 	bool bWallTouching;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallWalking)
-	bool bWallWalking;
+	
 	bool bLeftArmTouchingWall;
 	bool bRightArmTouchingWall;
 	AActor* aWallTouched;
