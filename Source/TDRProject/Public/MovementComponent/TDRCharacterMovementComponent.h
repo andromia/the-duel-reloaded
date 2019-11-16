@@ -62,5 +62,6 @@ public:
 	uint8 bWantsToDodge : 1;
 	uint8 bWalkup : 1;
 	uint8 bReturnToNormal : 1;
+	uint8 Turn : 1;
 	void ReturnToNormal();
 };

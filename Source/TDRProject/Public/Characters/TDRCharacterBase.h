@@ -131,6 +131,7 @@ private:
 	void TurnBack();
 
 	bool bWallTouching;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = WallWalking)
 	bool bWallWalking;
 	bool bLeftArmTouchingWall;
 	bool bRightArmTouchingWall;
@@ -141,4 +142,7 @@ private:
 	bool bWalkingSideWays;
 	float zValue;	
 	UTDRCharacterMovementComponent* MyCharacterMovementComponent;
+	void AddControllerYawInput(float Val) override;
+	void AddControllerPitchInput(float Val) override;
+	
 };
