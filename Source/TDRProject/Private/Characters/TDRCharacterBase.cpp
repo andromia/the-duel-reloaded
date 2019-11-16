@@ -62,6 +62,8 @@ void ATDRCharacterBase::PostInitializeComponents()
 
 void ATDRCharacterBase::MoveForward(float Value)
 {
+	if (bWallWalking)
+		return;
 	if ((Controller) && (Value != 0.0f))
 	{
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -75,6 +77,8 @@ void ATDRCharacterBase::MoveForward(float Value)
 
 void ATDRCharacterBase::MoveRight(float Value)
 {
+	if (bWallWalking)
+		return;
 	if ((Controller) && (Value != 0.0f))
 	{
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -265,8 +269,6 @@ void ATDRCharacterBase::Tick(float DeltaTime)
 
 void ATDRCharacterBase::Jump()
 {
-	//MyCharacterMovementComponent->Walkup();
-
 	if (bWallTouching && aWallTouched != NULL)
 	{
 		//angle to detect if we are going to walk up or walk sideways
@@ -280,35 +282,36 @@ void ATDRCharacterBase::Jump()
 		//Character has to be rotateed on axis based  on which way it will wall walk
 		if (angle > 2.7 && angle < 3.3)
 		{
-			fRotationXForWallWalk = 85;
-			LaunchCharacter(FVector(0, 0, CameraComp->GetUpVector().Z).GetSafeNormal() * WalkUpDistance, true, true);
+			bWallWalking = true;
+			MyCharacterMovementComponent->Walkup();
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);
 		}
-		else
-		{
-			bWalkingSideWays = true;
+		//else
+		//{
+		//	bWalkingSideWays = true;
 
-			//When we walk sideways, we want to be able to move up the wall on z the z axis first istead of touching the wall, this takes care of that as well as the code in the tick method
-			FVector location = GetActorLocation();
-			location.Z += 300;
-			zValue = location.Z;
-			SetActorLocation(location);
+		//	//When we walk sideways, we want to be able to move up the wall on z the z axis first istead of touching the wall, this takes care of that as well as the code in the tick method
+		//	FVector location = GetActorLocation();
+		//	location.Z += 300;
+		//	zValue = location.Z;
+		//	SetActorLocation(location);
 
-			if (bLeftArmTouchingWall)
-			{
-				fRotationZforWallWalk = -85;
-				LaunchCharacter(FVector(0, -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
-			}
-			else
-			{
-				fRotationZforWallWalk = 85;
-				LaunchCharacter(FVector(0, (CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
-			}
+		//	if (bLeftArmTouchingWall)
+		//	{
+		//		fRotationZforWallWalk = -85;
+		//		LaunchCharacter(FVector(0, -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
+		//	}
+		//	else
+		//	{
+		//		fRotationZforWallWalk = 85;
+		//		LaunchCharacter(FVector(0, (CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
+		//	}
 
-		}
-		FQuat QuatRotation = FQuat(FRotator(fRotationXForWallWalk, 0, fRotationZforWallWalk));
+		//}
+		/*FQuat QuatRotation = FQuat(FRotator(fRotationXForWallWalk, 0, fRotationZforWallWalk));
 		RootComponent->AddLocalRotation(QuatRotation, true, 0, ETeleportType::None);
 		GetMesh()->PlayAnimation(WallWalkingAnim, true);
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);*/
 	}
 	else
 	{
@@ -319,7 +322,7 @@ void ATDRCharacterBase::Jump()
 void ATDRCharacterBase::TurnBack()
 {
 	bWallWalking = false;
-	bWalkingSideWays = false;
+	/*bWalkingSideWays = false;
 
 	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
 	FQuat QuatRotation = FQuat(FRotator(-fRotationXForWallWalk, 0, -fRotationZforWallWalk));
@@ -327,9 +330,20 @@ void ATDRCharacterBase::TurnBack()
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 
 	fRotationXForWallWalk = 0;
-	fRotationZforWallWalk = 0;
+	fRotationZforWallWalk = 0;*/
 }
 
+void ATDRCharacterBase::AddControllerYawInput(float value)
+{
+	if (!bWallWalking)
+		Super::AddControllerYawInput(value);
+}
+
+void ATDRCharacterBase::AddControllerPitchInput(float value)
+{
+	if (!bWallWalking)
+		Super::AddControllerPitchInput(value);
+}
 // Called to bind functionality to input
 void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

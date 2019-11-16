@@ -19,16 +19,17 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 	//Dash
 		
 	if (bWalkup)
-	{					
+	{	
+		bWalkup = false;
 		if (PawnOwner->IsLocallyControlled())
 		{
-			Server_MoveDirection(PawnOwner->GetActorUpVector());
+			Server_MoveDirection(FVector(0,0,PawnOwner->GetActorUpVector().Z));
 		}
-		FVector DodgeVelocity = MoveDirection * DodgeStrength;
+		FVector DodgeVelocity = (MoveDirection * DodgeStrength / 2);
+		
+		FQuat QuatRotation = FQuat(FRotator(85, 0, 0));
+		PawnOwner->AddActorLocalRotation(QuatRotation,true,0, ETeleportType::None);
 		Launch(DodgeVelocity);
-		FQuat QuatRotation = FQuat(FRotator(90, 0, 0));
-		PawnOwner->AddActorLocalRotation(QuatRotation);
-		bWalkup = false;
 		FTimerHandle test;
 		PawnOwner->GetWorldTimerManager().SetTimer(test, this, &UTDRCharacterMovementComponent::ReturnToNormal, 2.f, false);
 	}
@@ -50,7 +51,7 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 
 	if (bReturnToNormal)
 	{
-		FQuat QuatRotation = FQuat(FRotator(-90, 0, 0));
+		FQuat QuatRotation = FQuat(FRotator(-85, 0, 0));
 		PawnOwner->AddActorLocalRotation(QuatRotation);
 		bReturnToNormal = false;
 	}
