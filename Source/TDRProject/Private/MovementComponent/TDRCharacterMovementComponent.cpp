@@ -37,7 +37,7 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 	{
 		if (PawnOwner->IsLocallyControlled())
 		{
-			Server_MoveDirection(FVector(0,0,PawnOwner->GetLastMovementInputVector().Z));
+			Server_MoveDirection(PawnOwner->GetLastMovementInputVector());
 		}
 		MoveDirection.Normalize();
 		FVector DodgeVelocity;
