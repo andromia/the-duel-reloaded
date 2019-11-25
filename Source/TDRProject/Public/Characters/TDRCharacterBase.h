@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "TDRCharacterBase.generated.h"
 
+
 class USpringArmComponent;
 class UCameraComponent;
 class UStaticMeshComponent;
@@ -19,8 +20,17 @@ class TDRPROJECT_API ATDRCharacterBase : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ATDRCharacterBase();
-
 	ATDRCharacterBase(const FObjectInitializer& ObjectInitializer);
+	UFUNCTION(Reliable, Server, WithValidation)
+		void Server_SetLocation();
+	bool Server_SetLocation_Validate();
+	void Server_SetLocation_Implmentation();
+
+
+	
+	
+	UPROPERTY(Replicated)
+	float ZLocation;
 
 	UFUNCTION(BluePrintCallable, Category = "Movement")
 		FORCEINLINE class UTDRCharacterMovementComponent* GetMovementComponet() const { return MyCharacterMovementComponent; }
@@ -94,6 +104,8 @@ protected:
 
 
 public:
+	AActor* aWallTouched;
+	bool bLeftArmTouchingWall;
 
 	enum MovementType { forward, backward, left, right };
 	void Dodge(MovementType direction);
@@ -134,9 +146,9 @@ private:
 
 	bool bWallTouching;
 	
-	bool bLeftArmTouchingWall;
+	
 	bool bRightArmTouchingWall;
-	AActor* aWallTouched;
+	
 	float fRotationXForWallWalk;
 	float fRotationZforWallWalk;
 	int Counter;

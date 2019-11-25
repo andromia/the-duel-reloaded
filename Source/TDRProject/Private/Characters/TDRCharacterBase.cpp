@@ -13,6 +13,7 @@
 #include "Animation/AnimSequence.h"
 #include "TDRCharacterMovementComponent.h"
 #include "Engine.h"
+#include "UnrealNetwork.h"
 
 
 // Sets default values
@@ -52,6 +53,13 @@ void ATDRCharacterBase::BeginPlay()
 	USkeletalMeshComponent* Comp = GetMesh();
 	Comp->OnComponentBeginOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapBegin);
 	Comp->OnComponentEndOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapEnd);
+}
+void ATDRCharacterBase::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// Replicate to everyone
+	DOREPLIFETIME(ATDRCharacterBase, ZLocation);
 }
 
 void ATDRCharacterBase::PostInitializeComponents()
@@ -102,30 +110,34 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 
 void ATDRCharacterBase::Dodge(MovementType direction)
 {
-	if (Debug)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
-	
-	if (Dashing)
-		return;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
+	MyCharacterMovementComponent->Dodge();
 
-	Dashing = true;
-	switch (direction)
-	{
-	case left:
-		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());
-		break;
-	case right:
-		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());
-		break;
-	case forward:
-		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());
-		break;
-	case backward:
-		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());
-		break;
-	}	
-	
-	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
+//{
+//	if (Debug)
+//		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
+//	
+//	if (Dashing)
+//		return;
+//
+//	Dashing = true;
+//	switch (direction)
+//	{
+//	case left:
+//		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());
+//		break;
+//	case right:
+//		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());
+//		break;
+//	case forward:
+//		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());
+//		break;
+//	case backward:
+//		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());
+//		break;
+//	}	
+//	
+//	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -217,7 +229,7 @@ void ATDRCharacterBase::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 {
 	FString TheString = OtherActor->GetName();
 	if (OtherActor->GetName().Contains("Wall"))
-	{
+	{		
 		float leftHAndDistance = GetMesh()->GetBoneLocation("hand_l").GetAbs().X - OtherActor->GetActorLocation().GetAbs().X;
 		float righHAndDistance = GetMesh()->GetBoneLocation("hand_r").GetAbs().X - OtherActor->GetActorLocation().GetAbs().X;
 		aWallTouched = OtherActor;
@@ -256,15 +268,40 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
+	/*if (MyCharacterMovementComponent->bWalkingSideWays)
+	{
+		Server_SetLocation();
+	}*/
 	//TraceForward();
 
 	//When walking sideways, we want to keep the actor on the z axis location
-	if (bWalkingSideWays && bWallWalking)
+	/*if (bWalkingSideWays && bWallWalking)
 	{
 		FVector location = GetActorLocation();
 		location.Z = zValue;
 		SetActorLocation(location);
+	}*/
+}
+
+bool ATDRCharacterBase::Server_SetLocation_Validate()
+{
+	return true;
+}
+
+void ATDRCharacterBase::Server_SetLocation_Implementation()
+{
+	FVector location = GetActorLocation();
+
+	if (ZLocation == 0.f)
+	{		
+		ZLocation = location.Z + 300;		
 	}
+	
+	location.Z = ZLocation;
+
+	SetActorLocation(location);
+	
+
 }
 
 void ATDRCharacterBase::Jump()
@@ -276,18 +313,17 @@ void ATDRCharacterBase::Jump()
 
 		//Since we are about to be launched somewhere, setting friction to 0 so that we dont slowed down by anything, as the speed shold be constant
 		GetCharacterMovement()->BrakingFrictionFactor = 0.f;
-		bWallWalking = true;
-
-
+	
 		//Character has to be rotateed on axis based  on which way it will wall walk
 		if (angle > 2.7 && angle < 3.3)
 		{
-			bWallWalking = true;
-			MyCharacterMovementComponent->Walkup();
-			GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);
+			MyCharacterMovementComponent->Walkup();			
 		}
-		//else
-		//{
+		else
+		{
+			MyCharacterMovementComponent->SideWalk();
+			ZLocation = GetActorLocation().Z + 200;
+		}
 		//	bWalkingSideWays = true;
 
 		//	//When we walk sideways, we want to be able to move up the wall on z the z axis first istead of touching the wall, this takes care of that as well as the code in the tick method

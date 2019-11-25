@@ -14,7 +14,7 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 {
 	GENERATED_UCLASS_BODY()
 
-	class FSavedMove_My : public FSavedMove_Character
+		class FSavedMove_My : public FSavedMove_Character
 	{
 	public:
 		typedef FSavedMove_Character Super;
@@ -27,8 +27,8 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 		//Dodge
 		FVector SavedMoveDirection;
 		uint8 bSavedWAntsToDodge : 1;
-		uint8 bSavedWalkUp: 1;
-		uint8 bReturnToNormal : 1;
+		uint8 bSavedWalkUp : 1;
+		uint8 bSavedWalkSideWays : 1;
 	};
 
 	class FNetworkPredictionData_Client_My : public FNetworkPredictionData_Client_Character
@@ -39,29 +39,47 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 		virtual FSavedMovePtr AllocateNewMove() override;
 	};
 
-public:		
+private:
 	virtual void UpdateFromCompressedFlags(uint8 flags) override;
 	virtual class FNetworkPredictionData_Client* GetPredictionData_Client() const override;
 	void OnMovementUpdated(float DeltaTime, const FVector& OldLocation, const FVector& OldVelocity);
 
+	UFUNCTION(Unreliable, Server, WithValidation)
+		void Server_MoveDirection(const FVector& MoveDir);
+	
+	void EndSideWalk();
+	
 
+	FVector MoveDirection;
+
+	uint8 bWantsToDodge : 1;
+
+	uint8 bWalkup : 1;
+
+	uint8 bWalkSideWays : 1;
+	FQuat PosToReturn;
+	uint8 bEndSideWalk;
+	
+	float ZLocation;
+		
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	UFUNCTION(Reliable, Server, WithValidation)
+		void Server_SetLocation();
+
+	
+public:
 	//Dodge
 	UPROPERTY(EditAnywhere, Category = "Dodge")
 		float DodgeStrength;
+	UPROPERTY(EditAnywhere, Category = "WallWalking")
+		float WallWalkingStrength;
+	//variables that will be used for the animation	
+	uint8 bWalkingUp : 1;
+	uint8 bWalkingSideWays : 1;
 
-	UFUNCTION(Unreliable, Server, WithValidation)
-		void Server_MoveDirection(const FVector& MoveDir);
-
-	UFUNCTION(BlueprintCallable, Category = "Dodge")
-		void Dodge(const FVector& MoveDir);
-
+	//methods called by the main actor
 	void Walkup();
-			
-
-	FVector MoveDirection;
-	uint8 bWantsToDodge : 1;
-	uint8 bWalkup : 1;
-	uint8 bReturnToNormal : 1;
-	uint8 Turn : 1;
-	void ReturnToNormal();
+	void SideWalk();
+	void Dodge();
 };
