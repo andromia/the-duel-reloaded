@@ -268,6 +268,16 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
+
+
+	if (Role == ROLE_Authority)
+	{
+		if (MyCharacterMovementComponent->bWalkingInWall)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("true!"));
+		}
+		
+	}
 	/*if (MyCharacterMovementComponent->bWalkingSideWays)
 	{
 		Server_SetLocation();

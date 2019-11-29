@@ -49,10 +49,12 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 		FQuat QuatRotation = FQuat(FRotator(-85, 0, 0));
 		PawnOwner->AddActorLocalRotation(QuatRotation, true, 0, ETeleportType::None);
 		bWalkingUp = false;
+		bWalkingInWall = false;
+		Server_WallWalking(false);
 	}
 
 	if (bWalkingSideWays && bEndSideWalk)
-	{
+	{		
 		/*if (PawnOwner->Role == ROLE_Authority)
 		{
 			FVector DodgeVelocity = (MoveDirection * 1000);
@@ -62,10 +64,13 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 		PawnOwner->AddActorLocalRotation(PosToReturn, true, 0, ETeleportType::None);
 		bEndSideWalk = false;
 		bWalkingSideWays = false;
+		bWalkingInWall = false;
+		Server_WallWalking(false);
 	}
 
 	if (bWalkup)
 	{
+		bWalkingInWall = true;
 		if (PawnOwner->IsLocallyControlled())
 		{
 			Server_MoveDirection(FVector(0, 0, PawnOwner->GetActorUpVector().Z));
@@ -80,10 +85,14 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 		}
 		bWalkup = false;
 		bWalkingUp = true;
+		
+		
 	}
 
 	if (bWalkSideWays)
 	{
+		Server_WallWalking(true);
+		bWalkingInWall = true;
 		//ZLocation = PawnOwner->GetActorLocation().Z + 200;
 		ATDRCharacterBase* CharacterMovement = Cast<ATDRCharacterBase>(PawnOwner);
 
@@ -287,6 +296,17 @@ void UTDRCharacterMovementComponent::Server_MoveDirection_Implementation(const F
 {
 	MoveDirection = MoveDir;
 }
+
+bool UTDRCharacterMovementComponent::Server_WallWalking_Validate(bool wallWalking)
+{
+	return true;
+}
+
+void UTDRCharacterMovementComponent::Server_WallWalking_Implementation(bool wallWalking)
+{
+	bWalkingInWall = wallWalking;
+}
+
 
 //Trigger dodge
 void UTDRCharacterMovementComponent::Dodge()

@@ -66,6 +66,8 @@ private:
 
 	UFUNCTION(Reliable, Server, WithValidation)
 		void Server_SetLocation();
+	UFUNCTION(Unreliable, Server, WithValidation)
+		void Server_WallWalking(bool wallWalking);
 
 	
 public:
@@ -77,6 +79,9 @@ public:
 	//variables that will be used for the animation	
 	uint8 bWalkingUp : 1;
 	uint8 bWalkingSideWays : 1;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerMusicSkill)
+	bool bWalkingInWall;
 
 	//methods called by the main actor
 	void Walkup();
