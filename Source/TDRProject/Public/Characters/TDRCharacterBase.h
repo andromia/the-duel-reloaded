@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "TDRCharacterBase.generated.h"
 
+
 class USpringArmComponent;
 class UCameraComponent;
 class UStaticMeshComponent;
@@ -19,6 +20,20 @@ class TDRPROJECT_API ATDRCharacterBase : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ATDRCharacterBase();
+	ATDRCharacterBase(const FObjectInitializer& ObjectInitializer);
+	UFUNCTION(Unreliable, Server, WithValidation)
+		void Server_SetLocation(bool wallWalking);
+
+
+
+
+	UPROPERTY(Replicated)
+		float ZLocation;
+
+	UFUNCTION(BluePrintCallable, Category = "Movement")
+		FORCEINLINE class UTDRCharacterMovementComponent* GetMovementComponet() const { return MyCharacterMovementComponent; }
+
+	virtual void PostInitializeComponents() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 		USpringArmComponent* SpringArmComp;
@@ -87,28 +102,25 @@ protected:
 
 
 public:
+	AActor* aWallTouched;
+	bool bLeftArmTouchingWall;
 
 	enum MovementType { forward, backward, left, right };
 	void Dodge(MovementType direction);
 	virtual void Tick(float DeltaTime) override;
 	void StopDashing();
-	void ResetDash();
-	void LaunchCharacterForDash(MovementType type);
 
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = WallWalking)
+		bool bWallWalking;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 		UStaticMeshComponent * LeftHandMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 		UStaticMeshComponent * RightHandMesh;
 
 #pragma region Dash properties
-	UPROPERTY(EditAnywhere, Category = "Dash")
-		float DashDistance;
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
-		float DashCoolDown;
-
-	UPROPERTY(EditAnywhere, Category = "Dash")
-		bool CanDash;
+		bool Dashing;
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
 		float DashStop;
@@ -131,13 +143,17 @@ private:
 	void TurnBack();
 
 	bool bWallTouching;
-	bool bWallWalking;
-	bool bLeftArmTouchingWall;
+
+
 	bool bRightArmTouchingWall;
-	AActor* aWallTouched;
+
 	float fRotationXForWallWalk;
 	float fRotationZforWallWalk;
 	int Counter;
 	bool bWalkingSideWays;
 	float zValue;
+	UTDRCharacterMovementComponent* MyCharacterMovementComponent;
+	void AddControllerYawInput(float Val) override;
+	void AddControllerPitchInput(float Val) override;
+
 };
