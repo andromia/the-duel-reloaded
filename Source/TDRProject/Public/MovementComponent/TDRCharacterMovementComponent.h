@@ -14,7 +14,7 @@ class TDRPROJECT_API UTDRCharacterMovementComponent : public UCharacterMovementC
 {
 	GENERATED_UCLASS_BODY()
 
-		class FSavedMove_My : public FSavedMove_Character
+	class FSavedMove_My : public FSavedMove_Character
 	{
 	public:
 		typedef FSavedMove_Character Super;
@@ -62,13 +62,6 @@ private:
 	FQuat PosToReturn;
 	uint8 bEndSideWalk;
 
-	float ZLocation;
-
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
-
-	UFUNCTION(Reliable, Server, WithValidation)
-		void Server_SetLocation();
-
 
 public:
 	//Dodge
@@ -77,8 +70,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "WallWalking")
 		float WallWalkingStrength;
 
-	UPROPERTY(Replicated, VisibleAnywhere, BlueprintReadOnly, Category = WallWalking)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WallWalking)
 		bool bWallWalking;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = WallWalking)
+		bool bDodge;
 
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 

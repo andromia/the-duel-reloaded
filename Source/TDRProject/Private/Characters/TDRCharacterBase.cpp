@@ -30,21 +30,12 @@ ATDRCharacterBase::ATDRCharacterBase(const FObjectInitializer& ObjectInitializer
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
 	CameraComp->SetupAttachment(SpringArmComp);
 
-	LeftHandMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Left"));
-	LeftHandMesh->SetupAttachment(RootComponent);
-	RightHandMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Right"));
-	RightHandMesh->SetupAttachment(RootComponent);
-
 	BaseTurnRate = 45.0f;
 	BaseLookupAtRate = 45.0f;
 	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
 
 	MyCharacterMovementComponent = Cast<UTDRCharacterMovementComponent>(GetMovementComponent());
-
-	Dashing = false;
-	DashStop = 0.5f;
-	WalkUpDistance = 1000.f;
 }
 
 void ATDRCharacterBase::BeginPlay()
@@ -53,13 +44,6 @@ void ATDRCharacterBase::BeginPlay()
 	USkeletalMeshComponent* Comp = GetMesh();
 	Comp->OnComponentBeginOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapBegin);
 	Comp->OnComponentEndOverlap.AddDynamic(this, &ATDRCharacterBase::OnOverlapEnd);
-}
-void ATDRCharacterBase::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	// Replicate to everyone
-	DOREPLIFETIME(ATDRCharacterBase, bWallWalking);
 }
 
 void ATDRCharacterBase::PostInitializeComponents()
@@ -70,7 +54,7 @@ void ATDRCharacterBase::PostInitializeComponents()
 
 void ATDRCharacterBase::MoveForward(float Value)
 {
-	if (bWallWalking)
+	if (MyCharacterMovementComponent->bWallWalking)
 		return;
 	if ((Controller) && (Value != 0.0f))
 	{
@@ -79,13 +63,12 @@ void ATDRCharacterBase::MoveForward(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
-
 	}
 }
 
 void ATDRCharacterBase::MoveRight(float Value)
 {
-	if (bWallWalking)
+	if (MyCharacterMovementComponent->bWallWalking)
 		return;
 	if ((Controller) && (Value != 0.0f))
 	{
@@ -94,7 +77,6 @@ void ATDRCharacterBase::MoveRight(float Value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		AddMovementInput(Direction, Value);
-
 	}
 }
 
@@ -108,36 +90,10 @@ void ATDRCharacterBase::LookUpAtRate(float Value)
 	AddControllerPitchInput(Value * BaseLookupAtRate * GetWorld()->GetDeltaSeconds());
 }
 
-void ATDRCharacterBase::Dodge(MovementType direction)
+void ATDRCharacterBase::Dodge()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
 	MyCharacterMovementComponent->Dodge();
-
-	//{
-	//	if (Debug)
-	//		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
-	//	
-	//	if (Dashing)
-	//		return;
-	//
-	//	Dashing = true;
-	//	switch (direction)
-	//	{
-	//	case left:
-	//		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetRightVector().X), -(CameraComp->GetRightVector().Y), 0).GetSafeNormal());
-	//		break;
-	//	case right:
-	//		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetRightVector().X, CameraComp->GetRightVector().Y, 0).GetSafeNormal());
-	//		break;
-	//	case forward:
-	//		MyCharacterMovementComponent->Dodge(FVector(CameraComp->GetForwardVector().X, CameraComp->GetForwardVector().Y, 0).GetSafeNormal());
-	//		break;
-	//	case backward:
-	//		MyCharacterMovementComponent->Dodge(FVector(-(CameraComp->GetForwardVector().X), -(CameraComp->GetForwardVector().Y), 0).GetSafeNormal());
-	//		break;
-	//	}	
-	//	
-	//	GetWorldTimerManager().SetTimer(UnusedHandle, this, &ATDRCharacterBase::StopDashing, DashStop, false);
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -151,12 +107,6 @@ void ATDRCharacterBase::InteractPressed()
 			Interface->Execute_OnInteract(FocusedActor, this);
 		}
 	}
-
-}
-
-void ATDRCharacterBase::StopCurrentAnimation()
-{
-	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 }
 
 void ATDRCharacterBase::TraceForward_Implementation()
@@ -268,18 +218,9 @@ void ATDRCharacterBase::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor
 
 void ATDRCharacterBase::Tick(float DeltaTime)
 {
-	Server_SetLocation(MyCharacterMovementComponent->bWallWalking);
+	
 }
 
-bool ATDRCharacterBase::Server_SetLocation_Validate(bool wallWalking)
-{
-	return true;
-}
-
-void ATDRCharacterBase::Server_SetLocation_Implementation(bool wallWalking)
-{
-	bWallWalking = wallWalking;
-}
 
 void ATDRCharacterBase::Jump()
 {
@@ -298,33 +239,8 @@ void ATDRCharacterBase::Jump()
 		}
 		else
 		{
-			MyCharacterMovementComponent->SideWalk();
-			ZLocation = GetActorLocation().Z + 200;
+			MyCharacterMovementComponent->SideWalk();			
 		}
-		//	bWalkingSideWays = true;
-
-		//	//When we walk sideways, we want to be able to move up the wall on z the z axis first istead of touching the wall, this takes care of that as well as the code in the tick method
-		//	FVector location = GetActorLocation();
-		//	location.Z += 300;
-		//	zValue = location.Z;
-		//	SetActorLocation(location);
-
-		//	if (bLeftArmTouchingWall)
-		//	{
-		//		fRotationZforWallWalk = -85;
-		//		LaunchCharacter(FVector(0, -(CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
-		//	}
-		//	else
-		//	{
-		//		fRotationZforWallWalk = 85;
-		//		LaunchCharacter(FVector(0, (CameraComp->GetRightVector().Y), 0).GetSafeNormal() * WalkUpDistance, true, true);
-		//	}
-
-		//}
-		/*FQuat QuatRotation = FQuat(FRotator(fRotationXForWallWalk, 0, fRotationZforWallWalk));
-		RootComponent->AddLocalRotation(QuatRotation, true, 0, ETeleportType::None);
-		GetMesh()->PlayAnimation(WallWalkingAnim, true);
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &ATDRCharacterBase::TurnBack, 2.f, false);*/
 	}
 	else
 	{
@@ -332,29 +248,15 @@ void ATDRCharacterBase::Jump()
 	}
 }
 
-void ATDRCharacterBase::TurnBack()
-{
-	bWallWalking = false;
-	/*bWalkingSideWays = false;
-
-	GetCharacterMovement()->BrakingFrictionFactor = 2.f;
-	FQuat QuatRotation = FQuat(FRotator(-fRotationXForWallWalk, 0, -fRotationZforWallWalk));
-	RootComponent->AddLocalRotation(QuatRotation, false, 0, ETeleportType::None);
-	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
-
-	fRotationXForWallWalk = 0;
-	fRotationZforWallWalk = 0;*/
-}
-
 void ATDRCharacterBase::AddControllerYawInput(float value)
 {
-	if (!bWallWalking)
+	if (!MyCharacterMovementComponent->bWallWalking)
 		Super::AddControllerYawInput(value);
 }
 
 void ATDRCharacterBase::AddControllerPitchInput(float value)
 {
-	if (!bWallWalking)
+	if (!MyCharacterMovementComponent->bWallWalking)
 		Super::AddControllerPitchInput(value);
 }
 // Called to bind functionality to input
@@ -362,23 +264,15 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 {
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ATDRCharacterBase::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, right);
-	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeLeft", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, left);
-	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, forward);
-	PlayerInputComponent->BindAction<DirectionDelagate>("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge, backward);
+	PlayerInputComponent->BindAction("DodgeRight", IE_DoubleClick, this, &ATDRCharacterBase::Dodge);
+	PlayerInputComponent->BindAction("DodgeLeft", IE_DoubleClick, this, &ATDRCharacterBase::Dodge);
+	PlayerInputComponent->BindAction("DodgeForward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge);
+	PlayerInputComponent->BindAction("DodgeBackward", IE_DoubleClick, this, &ATDRCharacterBase::Dodge);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ATDRCharacterBase::InteractPressed);
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATDRCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATDRCharacterBase::MoveRight);
-
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAtRate", this, &ATDRCharacterBase::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
 }
-
-#pragma region Helper methods
-void ATDRCharacterBase::StopDashing()
-{
-	Dashing = false;
-}
-#pragma endregion methods

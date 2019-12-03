@@ -7,44 +7,13 @@
 
 UTDRCharacterMovementComponent::UTDRCharacterMovementComponent(const class FObjectInitializer& ObjectInitialiazer) : Super(ObjectInitialiazer)
 {
-	DodgeStrength = 10000.f;
+	DodgeStrength = 2000.f;
 	WallWalkingStrength = 1000.f;
 }
 
 void UTDRCharacterMovementComponent::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
 {
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	// Replicate to everyone
-	DOREPLIFETIME(UTDRCharacterMovementComponent, ZLocation);
-}
-
-
-
-void UTDRCharacterMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (bWalkingSideWays)
-	{
-		Server_SetLocation();
-	}
-}
-
-bool UTDRCharacterMovementComponent::Server_SetLocation_Validate()
-{
-	return true;
-}
-
-void UTDRCharacterMovementComponent::Server_SetLocation_Implementation()
-{
-	/*if (PawnOwner->Role == ROLE_Authority)
-	{
-		FVector a = PawnOwner->GetActorLocation();
-		a.Z = ZLocation;
-		PawnOwner->SetActorLocation(a);
-	}*/
-
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);	
 }
 
 void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FVector& OldLocation, const FVector& OldVelocity)
@@ -65,12 +34,6 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 
 	if (bWalkingSideWays && bEndSideWalk)
 	{
-		/*if (PawnOwner->Role == ROLE_Authority)
-		{
-			FVector DodgeVelocity = (MoveDirection * 1000);
-			Launch(DodgeVelocity);
-		}*/
-
 		PawnOwner->AddActorLocalRotation(PosToReturn, true, 0, ETeleportType::None);
 		bEndSideWalk = false;
 		bWalkingSideWays = false;
@@ -98,15 +61,14 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 
 	if (bWalkSideWays)
 	{
-		//ZLocation = PawnOwner->GetActorLocation().Z + 200;
-		ATDRCharacterBase* CharacterMovement = Cast<ATDRCharacterBase>(PawnOwner);
+		ATDRCharacterBase* TDRCharacter = Cast<ATDRCharacterBase>(PawnOwner);
 
 		if (PawnOwner->IsLocallyControlled())
 		{
 			Server_MoveDirection(FVector(PawnOwner->GetActorForwardVector().X, PawnOwner->GetActorForwardVector().Y, 0).GetSafeNormal());
 		}
 
-		if (CharacterMovement->bLeftArmTouchingWall)
+		if (TDRCharacter->bLeftArmTouchingWall)
 		{
 			FQuat QuatRotation = FQuat(FRotator(0, 0, -85));
 			PosToReturn = FQuat(FRotator(0, 0, 85));
@@ -136,6 +98,7 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 
 	if (bWantsToDodge)
 	{
+		bDodge = true;
 		if (PawnOwner->IsLocallyControlled())
 		{
 			Server_MoveDirection(PawnOwner->GetLastMovementInputVector());
@@ -146,31 +109,8 @@ void UTDRCharacterMovementComponent::OnMovementUpdated(float DeltaTime, const FV
 			Launch(DodgeVelocity);
 		}
 		bWantsToDodge = false;
+		bDodge = false;
 	}
-	/*if (PawnOwner->Role == ROLE_Authority)
-	{
-		if (bWantsToDodge)
-		{
-			if (PawnOwner->IsLocallyControlled())
-			{
-				Server_MoveDirection(PawnOwner->GetLastMovementInputVector());
-			}
-			MoveDirection.Normalize();
-			FVector DodgeVelocity;
-			DodgeVelocity = MoveDirection * DodgeStrength;
-			DodgeVelocity.Z = 0.0f;
-			Launch(DodgeVelocity);
-			bWantsToDodge = false;
-
-		}
-
-		if (bReturnToNormal)
-		{
-			FQuat QuatRotation = FQuat(FRotator(-85, 0, 0));
-			PawnOwner->AddActorLocalRotation(QuatRotation);
-			bReturnToNormal = false;
-		}
-	}*/
 
 }
 
