@@ -34,8 +34,17 @@ ATDRCharacterBase::ATDRCharacterBase(const FObjectInitializer& ObjectInitializer
 	BaseLookupAtRate = 45.0f;
 	BaseDodgeMultiplier = 50.0f;
 	TraceDistance = 2000.0f;
+	bDashing = false;
 
 	MyCharacterMovementComponent = Cast<UTDRCharacterMovementComponent>(GetMovementComponent());
+}
+
+void ATDRCharacterBase::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	// Replicate to everyone
+	DOREPLIFETIME(ATDRCharacterBase, bDashing);
 }
 
 void ATDRCharacterBase::BeginPlay()
@@ -94,6 +103,27 @@ void ATDRCharacterBase::Dodge()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Orange, TEXT("Character: Dodging somewhere"));
 	MyCharacterMovementComponent->Dodge();
+}
+
+void ATDRCharacterBase::Dash(int movement)
+{
+	if ((Controller != NULL))
+	{
+		if (Role < ROLE_Authority)
+		{
+			ServerDash(movement);
+		}
+	}
+}
+
+bool ATDRCharacterBase::GetDash()
+{
+	return bDashing;
+}
+
+void ATDRCharacterBase::StopDash()
+{
+	bDashing = false;
 }
 
 void ATDRCharacterBase::InteractPressed()
@@ -275,4 +305,49 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAtRate", this, &ATDRCharacterBase::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUpAtRate", this, &ATDRCharacterBase::LookUpAtRate);
+}
+
+bool ATDRCharacterBase::ServerDash_Validate(int movement)
+{
+	
+	return true;
+}
+
+void ATDRCharacterBase::ServerDash_Implementation(int movement)
+{
+	if (Role == ROLE_Authority)
+	{
+		//0 -> right
+		//1 -> left
+		//2 -> forward
+		//3 -> backward
+		
+		bDashing = true;
+		if (movement == 0)
+		{
+			LaunchCharacter(FVector(GetActorRightVector().X ,GetActorRightVector().Y, 0).GetSafeNormal() * 1000.f, true, true);
+		}
+		else if (movement == 1)
+		{
+			LaunchCharacter(FVector(-(GetActorRightVector().X), -(GetActorRightVector().Y), 0).GetSafeNormal() * 1000.f, true, true);
+		}
+		else if (movement == 2)
+		{
+			LaunchCharacter(FVector(GetActorForwardVector().X, GetActorForwardVector().Y, 0).GetSafeNormal() * 1000.f, true, true);
+		}
+		else
+		{
+			LaunchCharacter(FVector(-(GetActorForwardVector().X), -(GetActorForwardVector().Y), 0).GetSafeNormal() * 1000.f, true, true);
+		}
+		
+		if (bDashing)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Yellow, "true");
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Yellow, "false");
+		}
+		GetWorld()->GetTimerManager().SetTimer(DashHandle, this, &ATDRCharacterBase::StopDash, 0.5f, false);
+	}
 }
