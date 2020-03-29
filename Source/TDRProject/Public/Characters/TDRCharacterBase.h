@@ -59,6 +59,19 @@ protected:
 	bool ServerAtack_Validate();
 	void ServerAtack_Implementation();
 
+	////Die methods
+	void Die();
+	UFUNCTION(NetMulticast, Reliable, WithValidation)	
+	void MultiDie();
+	bool MultiDie_Validate();
+	void MultiDie_Implementation();	     
+	void DestroyChar();
+
+	//Weapons
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AWeaponBase> WeaponClass;
+	class AWeaponBase* Weapon;
+
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
@@ -74,12 +87,9 @@ protected:
 
 	FTimerHandle DashHandle;
 
-	class ULineTrace* LineTraceComp;
+	FTimerHandle DestroyHandle;
 
-public:
-	ATDRCharacterBase();
-	UFUNCTION(BlueprintCallable)
-	DodgeDirection GetDash();
+	class ULineTrace* LineTraceComp;
 
 public:
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -89,10 +99,25 @@ public:
 
 	UPROPERTY(Replicated)
 	DodgeDirection DashingDirection;
+	
+	UPROPERTY(Replicated)
+		bool bAtacking;
+
+	UPROPERTY(Replicated)
+		bool bBlocking;
 
 public:
+	ATDRCharacterBase();
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+
+	UFUNCTION(BlueprintCallable)
+		DodgeDirection GetDash();
+
+	UFUNCTION(BlueprintCallable)
+		bool GetAtack();
+
 	UFUNCTION(BlueprintPure)
 		FString GetInformation();
 	
-	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+	
 };

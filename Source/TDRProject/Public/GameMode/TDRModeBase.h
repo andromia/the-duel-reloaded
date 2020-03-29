@@ -14,6 +14,18 @@ class TDRPROJECT_API ATDRModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
+protected:
+	TArray<class ASpawnPoints*> SpawnPoints;
+
+
+protected:
+	UFUNCTION()
+	void Spawn(AController* Controller);
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+
 public:
 	ATDRModeBase();
+	void Respawn(AController* Controller);
+	virtual void BeginPlay() override;
+
 };

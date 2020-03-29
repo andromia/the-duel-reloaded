@@ -2,7 +2,9 @@
 
 
 #include "TDRCharacterBase.h"
+#include "TDRModeBase.h"
 #include "PlayerStatComponent.h"
+#include "WeaponBase.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -41,17 +43,44 @@ DodgeDirection ATDRCharacterBase::GetDash()
 	return DashingDirection;
 }
 
+bool ATDRCharacterBase::GetAtack()
+{
+	if (bAtacking) {
+		UE_LOG(LogTemp, Warning, TEXT("true"));
+	}		
+	else
+		UE_LOG(LogTemp, Warning, TEXT("false"));
+	return bAtacking;
+}
+
 void ATDRCharacterBase::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	// Replicate to everyone
 	DOREPLIFETIME(ATDRCharacterBase, DashingDirection);
+	DOREPLIFETIME(ATDRCharacterBase, bAtacking);
+	DOREPLIFETIME(ATDRCharacterBase, bBlocking);
 }
 
 void ATDRCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.bNoFail = true;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	
+	if (WeaponClass)
+	{
+		FTransform WeaponTransform;
+		WeaponTransform.SetLocation(FVector::ZeroVector);
+		WeaponTransform.SetRotation(FQuat(FRotator::ZeroRotator));
+		Weapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClass, WeaponTransform, SpawnParams);		
+		if (Weapon)
+		{
+			Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("hand_R"));
+		}
+	}			
 }
 
 void ATDRCharacterBase::MoveForward(float Value)
@@ -120,8 +149,7 @@ void ATDRCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 }
 
 void ATDRCharacterBase::Dash(DodgeDirection Direction)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Here"));
+{	
 	if ((Controller != NULL))
 	{		
 		if (GetLocalRole() < ROLE_Authority)
@@ -166,33 +194,51 @@ void ATDRCharacterBase::ServerDash_Implementation(DodgeDirection Direction)
 void ATDRCharacterBase::StopDash()
 {
 	DashingDirection = DodgeDirection::Nothing;
-	UE_LOG(LogTemp, Warning, TEXT("false"));
+	bAtacking = false;;
 }
 
 void ATDRCharacterBase::Atack()
-{
+{	
+	bAtacking = true;
+	
 	FVector Start = GetMesh()->GetBoneLocation(FName("Head"));
 	FVector End = Start + CameraComp->GetForwardVector() * 1500.0f;
 
 	FHitResult HitResult = LineTraceComp->LineTraceSingle(Start, End, true);
-	if (AActor* Actor = HitResult.GetActor())
+	
+	if (Role < ROLE_Authority)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("I have touched something"));
-		FString name = Actor->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("this is something else %S"), *name);
-
-		if (ATDRCharacterBase* Character = Cast<ATDRCharacterBase>(Actor))
+		ServerAtack();
+	}
+	else
+	{
+		if (AActor* Actor = HitResult.GetActor())
 		{
-			if (Role < ROLE_Authority)
+			FString name = Actor->GetName();
+
+			if (ATDRCharacterBase* Character = Cast<ATDRCharacterBase>(Actor))
 			{
-				ServerAtack();
-				return;
+
+
+				float testDamage = -20;
+				Character->TakeDamage(testDamage, FDamageEvent(), GetController(), this);
+				if (Character->PlayerStatComp->GetHealth() == 0.f)
+				{
+					Character->Die();
+				}
+
+				if (bAtacking) {
+					UE_LOG(LogTemp, Warning, TEXT("true"));
+				}
+				else
+					UE_LOG(LogTemp, Warning, TEXT("false"));
 			}
-			
-			float testDamage = -20;			
-			Character->TakeDamage(testDamage, FDamageEvent(), GetController(), this);			
 		}
 	}
+	FTimerHandle test;
+	GetWorld()->GetTimerManager().SetTimer(test, this, &ATDRCharacterBase::StopDash, 0.5f, false);
+	//bAtacking = false;
+	
 }
 
 bool ATDRCharacterBase::ServerAtack_Validate()
@@ -204,6 +250,39 @@ void ATDRCharacterBase::ServerAtack_Implementation()
 {
 	Atack();
 }
+
+void ATDRCharacterBase::Die()
+{	
+	if (Role == ROLE_Authority)
+	{
+		MultiDie();
+		AGameModeBase* GM = GetWorld()->GetAuthGameMode();
+		if (ATDRModeBase* GameMode = Cast<ATDRModeBase>(GM))
+		{
+			GameMode->Respawn(GetController());
+		}
+		GetWorld()->GetTimerManager().SetTimer(DestroyHandle, this, &ATDRCharacterBase::DestroyChar, 10.5f, false);		
+	}
+}
+//
+bool ATDRCharacterBase::MultiDie_Validate()
+{
+	return true;
+}
+
+void ATDRCharacterBase::MultiDie_Implementation()
+{
+	GetCapsuleComponent()->DestroyComponent();
+	this->GetCharacterMovement()->DisableMovement();
+	this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	this->GetMesh()->SetAllBodiesSimulatePhysics(true);
+}
+
+void ATDRCharacterBase::DestroyChar()
+{
+	Destroy();
+}
+
 
 
 FString ATDRCharacterBase::GetInformation()
